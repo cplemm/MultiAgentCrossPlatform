@@ -1,0 +1,13 @@
+services:
+  hosted-agent:
+    build: ./hosted-agent
+    env_file: ./hosted-agent/.env
+    ports:
+      - "8088:8088"
+
+  cps-bridge:
+    build: ./cps-bridge
+    env_file: ./cps-bridge/.env
+    ports:
+      - "8000:8000"
+

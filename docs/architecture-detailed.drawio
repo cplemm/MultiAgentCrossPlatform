@@ -1,0 +1,193 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="stock-agent-architecture" name="Detailed Architecture">
+    <mxGraphModel dx="2928" dy="1182" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#172B4D;" value="Foundry Hosted Stock Agent - Detailed Architecture and End-to-End Flow" vertex="1">
+          <mxGeometry height="45" width="1100" x="421" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="channel-zone" parent="1" style="swimlane;html=1;rounded=1;startSize=38;horizontal=1;fillColor=#F3F2F1;strokeColor=#605E5C;strokeWidth=2;fontStyle=1;fontSize=15;fontColor=#323130;" value="User Channel" vertex="1">
+          <mxGeometry height="680" width="280" x="11" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="step12" parent="channel-zone" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontSize=13;fontColor=#172B4D;align=center;verticalAlign=middle;" value="&lt;b&gt;11&lt;/b&gt;&amp;nbsp;&amp;nbsp;Response" vertex="1">
+          <mxGeometry height="38" width="180" x="89" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="step1" parent="channel-zone" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontSize=13;fontColor=#172B4D;align=center;verticalAlign=middle;" value="&lt;b&gt;1&lt;/b&gt;&amp;nbsp;&amp;nbsp;User prompt" vertex="1">
+          <mxGeometry height="38" width="120" x="167" y="155" as="geometry" />
+        </mxCell>
+        <mxCell id="foundry-zone" parent="1" style="swimlane;html=1;rounded=1;startSize=38;horizontal=1;fillColor=#EAF3FF;strokeColor=#0078D4;strokeWidth=2;fontStyle=1;fontSize=15;fontColor=#004578;" value="Microsoft Foundry" vertex="1">
+          <mxGeometry height="680" width="780" x="330" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="step3" parent="foundry-zone" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontSize=13;fontColor=#172B4D;align=center;verticalAlign=middle;" value="&lt;b&gt;2&lt;/b&gt;&amp;nbsp; Generate and orchestrate" vertex="1">
+          <mxGeometry height="38" width="205" x="250" y="86" as="geometry" />
+        </mxCell>
+        <mxCell id="model" parent="foundry-zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDEBFF;strokeColor=#0078D4;strokeWidth=2;fontStyle=1;fontSize=13;" value="Foundry Model Deployment&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;&lt;i&gt;GPT-5.4-mini&lt;/i&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="220" x="440" y="86" as="geometry" />
+        </mxCell>
+        <mxCell id="3" parent="foundry-zone" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontSize=13;fontColor=#172B4D;align=center;verticalAlign=middle;" value="&lt;b&gt;4b&lt;/b&gt;&amp;nbsp;&amp;nbsp;Analyze stock" vertex="1">
+          <mxGeometry height="58" width="220" x="521" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="step4" parent="foundry-zone" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontSize=13;fontColor=#172B4D;align=center;verticalAlign=middle;" value="&lt;b&gt;3&lt;/b&gt;&amp;nbsp; Invoke tools" vertex="1">
+          <mxGeometry height="38" width="140" x="260" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="step5" parent="foundry-zone" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontSize=13;fontColor=#D83B01;align=center;verticalAlign=middle;" value="&lt;b&gt;4a&lt;/b&gt;&amp;nbsp;&amp;nbsp;Find price" vertex="1">
+          <mxGeometry height="58" width="220" x="300" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="web-search" parent="foundry-zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D83B01;strokeWidth=2;fontSize=13;" value="Stock Price Web Search&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Current price evidence&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="210" x="140" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="step6" parent="foundry-zone" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontSize=13;fontColor=#172B4D;align=center;verticalAlign=middle;" value="&lt;b&gt;5&lt;/b&gt;&amp;nbsp;&amp;nbsp;HTTPS MCP&amp;nbsp;&lt;div&gt;incl. user token&lt;/div&gt;" vertex="1">
+          <mxGeometry height="46" width="120" x="666" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="bridge-zone" parent="1" style="swimlane;html=1;rounded=1;startSize=38;horizontal=1;fillColor=#E8F5E9;strokeColor=#107C10;strokeWidth=2;fontStyle=1;fontSize=15;fontColor=#0B5A0B;" value="Azure Integration" vertex="1">
+          <mxGeometry height="680" width="368" x="1150" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="step7" parent="bridge-zone" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontSize=13;fontColor=#5C2D91;align=center;verticalAlign=middle;" value="&lt;b&gt;7&lt;/b&gt;&amp;nbsp; OBO assertion" vertex="1">
+          <mxGeometry height="38" width="180" x="188" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="power-zone" parent="1" style="swimlane;html=1;rounded=1;startSize=38;horizontal=1;fillColor=#F5EEFB;strokeColor=#8764B8;strokeWidth=2;fontStyle=1;fontSize=15;fontColor=#5C2D91;" value="Identity and Power Platform" vertex="1">
+          <mxGeometry height="680" width="390" x="1550" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="step8" parent="power-zone" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontSize=13;fontColor=#5C2D91;align=center;verticalAlign=middle;" value="&lt;b&gt;8&lt;/b&gt;&amp;nbsp; Power Platform token" vertex="1">
+          <mxGeometry height="42" width="205" x="197.5" y="178" as="geometry" />
+        </mxCell>
+        <mxCell id="step9" parent="power-zone" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontSize=13;fontColor=#D83B01;align=center;verticalAlign=middle;" value="&lt;b&gt;9&lt;/b&gt;&amp;nbsp; Research" vertex="1">
+          <mxGeometry height="38" width="145" x="194.5" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="user" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#605E5C;strokeWidth=2;fontStyle=1;fontSize=14;" value="Teams or Microsoft 365 User" vertex="1">
+          <mxGeometry height="70" width="150" x="61" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="teams" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1DFDD;strokeColor=#605E5C;strokeWidth=2;fontSize=13;" value="Teams and Microsoft 365 Platform Edge" vertex="1">
+          <mxGeometry height="80" width="150" x="61" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="agent" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0078D4;strokeColor=#004578;strokeWidth=2;fontColor=#FFFFFF;fontStyle=1;fontSize=14;" value="Hosted Stock Agent&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;&lt;i style=&quot;color: rgb(255, 255, 255);&quot;&gt;Python Agent Framework&lt;br&gt;Responses Protocol 2.0&lt;/i&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="210" x="390" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="toolbox" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDEBFF;strokeColor=#0078D4;strokeWidth=2;fontStyle=1;fontSize=13;" value="Foundry Toolbox&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;&lt;i&gt;Tool orchestration and delegated identity&lt;/i&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="250" x="770" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="mcp-connection" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0078D4;strokeWidth=2;fontSize=13;" value="Remote MCP Connection&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;OAuth 2.0 delegated token&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="210" x="790" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="bridge" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#107C10;strokeColor=#0B5A0B;strokeWidth=2;fontColor=#FFFFFF;fontStyle=1;fontSize=14;" value="CPS Bridge&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;&lt;i style=&quot;color: rgb(255, 255, 255);&quot;&gt;Azure Container Apps&lt;br&gt;FastMCP resource server&lt;/i&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="230" x="1215" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="token-verifier" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#107C10;strokeWidth=2;fontSize=12;" value="Token Validation&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Issuer, audience, scope, expiry&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="230" x="1215" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="entra" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8764B8;strokeColor=#5C2D91;strokeWidth=2;fontColor=#FFFFFF;fontStyle=1;fontSize=14;" value="Microsoft Entra ID&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;&lt;i style=&quot;color: rgb(255, 255, 255);&quot;&gt;On-behalf-of token exchange&lt;/i&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="230" x="1630" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="copilot-studio" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8764B8;strokeColor=#5C2D91;strokeWidth=2;fontColor=#FFFFFF;fontStyle=1;fontSize=14;" value="Copilot Studio Agent&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;&lt;i style=&quot;color: rgb(255, 255, 255);&quot;&gt;Financial research and analysis&lt;/i&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="1630" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="market-sources" parent="1" style="shape=cloud;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#D83B01;strokeWidth=2;fontStyle=0;fontSize=13;" value="Web Search" vertex="1">
+          <mxGeometry height="95" width="230" x="1630" y="635" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0078D4;strokeWidth=3;endArrow=block;" target="teams" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="teams" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0078D4;strokeWidth=3;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="agent" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="430" />
+              <mxPoint x="260" y="308" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="agent" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0078D4;strokeWidth=3;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="model" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="308" />
+              <mxPoint x="680" y="244" />
+              <mxPoint x="770" y="244" />
+            </Array>
+            <mxPoint x="750" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="agent" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0078D4;strokeWidth=3;endArrow=block;exitX=1;exitY=0.75;entryX=0;entryY=0.5;" target="toolbox" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="660" y="331" />
+              <mxPoint x="660" y="433" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5a" edge="1" parent="1" source="toolbox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D83B01;strokeWidth=3;endArrow=block;exitX=0.35;exitY=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="858" y="575" />
+              <mxPoint x="620" y="575" />
+              <mxPoint x="620" y="620" />
+            </Array>
+            <mxPoint x="620" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5b" edge="1" parent="1" source="toolbox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0078D4;strokeWidth=3;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="mcp-connection" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="mcp-connection" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0078D4;strokeWidth=3;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="bridge" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1080" y="658" />
+              <mxPoint x="1080" y="390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-validate" edge="1" parent="1" source="bridge" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#107C10;strokeWidth=2;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="token-verifier" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="bridge" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8764B8;strokeWidth=3;dashed=1;dashPattern=8 5;endArrow=block;exitX=1;exitY=0.25;entryX=0;entryY=0.5;" target="entra" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1490" y="365" />
+              <mxPoint x="1490" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="entra" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8764B8;strokeWidth=3;dashed=1;dashPattern=8 5;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="copilot-studio" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="copilot-studio" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D83B01;strokeWidth=3;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="market-sources" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="copilot-studio" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0078D4;strokeWidth=3;endArrow=block;exitX=0;exitY=0.5;entryX=1;entryY=0.75;" target="bridge" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1530" y="433" />
+              <mxPoint x="1530" y="415" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="agent" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0078D4;strokeWidth=3;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="teams" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="495" y="340" />
+              <mxPoint x="360" y="340" />
+              <mxPoint x="360" y="720" />
+              <mxPoint x="136" y="720" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="teams" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0078D4;strokeWidth=3;endArrow=block;exitX=0;exitY=0.5;entryX=0;entryY=0.5;" target="user" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="36" y="430" />
+              <mxPoint x="36" y="225" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step10" parent="1" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontSize=13;fontColor=#172B4D;align=center;verticalAlign=middle;" value="&lt;b&gt;10&lt;/b&gt;&amp;nbsp; Analysis with sources" vertex="1">
+          <mxGeometry height="42" width="190" x="1449" y="437" as="geometry" />
+        </mxCell>
+        <mxCell id="validation-label" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=none;fontSize=12;fontColor=#0B5A0B;align=center;spacing=4;" value="&lt;b&gt;6&lt;/b&gt;&amp;nbsp;Validate token" vertex="1">
+          <mxGeometry height="32" width="120" x="1338" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A19F9D;fontSize=12;align=left;verticalAlign=top;spacing=10;" value="&lt;b&gt;Connector key&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#0078D4&quot;&gt;Solid blue&lt;/font&gt;: request and result flow&lt;br&gt;&lt;font color=&quot;#8764B8&quot;&gt;Dashed purple&lt;/font&gt;: delegated identity flow&lt;br&gt;&lt;font color=&quot;#D83B01&quot;&gt;Orange&lt;/font&gt;: external public data" vertex="1">
+          <mxGeometry height="120" width="280" x="11" y="820" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

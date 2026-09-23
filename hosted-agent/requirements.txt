@@ -1,0 +1,5 @@
+agent-framework-foundry
+agent-framework-foundry-hosting>=1.0.0b260813
+azure-identity
+python-dotenv
+
