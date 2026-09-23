@@ -1,71 +1,68 @@
-<mxfile host="65bd71144e">
-    <diagram id="high-level-sketch" name="High-Level Sketch">
-        <mxGraphModel dx="1952" dy="712" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
-            <root>
-                <mxCell id="0"/>
-                <mxCell id="1" parent="0"/>
-                <mxCell id="title" value="Stock Briefing Agents&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=28;fontStyle=1;fontFamily=Comic Sans MS;fontColor=#172B4D;" parent="1" vertex="1">
-                    <mxGeometry x="485" y="45" width="500" height="50" as="geometry"/>
-                </mxCell>
-                <mxCell id="subtitle" value="High-level request and delegation flow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;fontFamily=Comic Sans MS;fontColor=#5E6C84;" parent="1" vertex="1">
-                    <mxGeometry x="485" y="90" width="500" height="35" as="geometry"/>
-                </mxCell>
-                <mxCell id="teams" value="Teams /&amp;nbsp;&lt;div&gt;M365 Copilot&lt;br&gt;&lt;font style=&quot;font-size:14px&quot;&gt;User conversation&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#EDE7F6;strokeColor=#6264A7;strokeWidth=3;fontColor=#333333;fontSize=21;fontStyle=1;fontFamily=Comic Sans MS;shadow=0;" parent="1" vertex="1">
-                    <mxGeometry x="65" y="300" width="230" height="145" as="geometry"/>
-                </mxCell>
-                <mxCell id="foundry" value="Microsoft Foundry" style="swimlane;html=1;rounded=1;startSize=42;horizontal=1;sketch=1;comic=1;jiggle=2;fillColor=#EAF3FF;strokeColor=#0078D4;strokeWidth=3;fontColor=#004578;fontSize=20;fontStyle=1;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-                    <mxGeometry x="385" y="195" width="380" height="355" as="geometry"/>
-                </mxCell>
-                <mxCell id="agent" value="Hosted Agent&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Understands the request&lt;br&gt;and creates the response&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#DAECFF;strokeColor=#0078D4;strokeWidth=2;fontColor=#004578;fontSize=19;fontStyle=1;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-                    <mxGeometry x="430" y="270" width="290" height="105" as="geometry"/>
-                </mxCell>
-                <mxCell id="toolbox" value="Toolbox&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Web search plus MCP tool&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#FFFFFF;strokeColor=#0078D4;strokeWidth=2;fontColor=#004578;fontSize=19;fontStyle=1;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-                    <mxGeometry x="430" y="420" width="290" height="90" as="geometry"/>
-                </mxCell>
-                <mxCell id="container-apps" value="Azure Container Apps&lt;br&gt;&lt;font style=&quot;font-size:18px&quot;&gt;CPS Bridge&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Authenticated MCP endpoint&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#E8F5E9;strokeColor=#107C10;strokeWidth=3;fontColor=#0B5A0B;fontSize=20;fontStyle=1;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-                    <mxGeometry x="855" y="285" width="260" height="175" as="geometry"/>
-                </mxCell>
-                <mxCell id="copilot-studio" value="Copilot Studio Agent&lt;br&gt;&lt;font style=&quot;font-size:14px&quot;&gt;Research and analysis&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#F5EEFB;strokeColor=#8764B8;strokeWidth=3;fontColor=#5C2D91;fontSize=21;fontStyle=1;fontFamily=Comic Sans MS;" parent="1" vertex="1">
-                    <mxGeometry x="1210" y="300" width="255" height="145" as="geometry"/>
-                </mxCell>
-                <mxCell id="e1" value="Ask for a stock briefing" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#44546A;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D6D6D6;spacing=5;" parent="1" source="teams" target="agent" edge="1">
-                    <mxGeometry y="-34" relative="1" as="geometry">
-                        <mxPoint as="offset"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="e2" value="Use tools" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#0078D4;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#B3D7F2;spacing=5;" parent="1" source="agent" target="toolbox" edge="1">
-                    <mxGeometry y="-54" relative="1" as="geometry">
-                        <mxPoint as="offset"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="e3" value="Delegate analysis" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#44546A;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D6D6D6;spacing=5;" parent="1" source="toolbox" target="container-apps" edge="1">
-                    <mxGeometry x="-0.0286" y="6" relative="1" as="geometry">
-                        <mxPoint x="1" as="offset"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="e4" value="Call agent on&amp;nbsp;&lt;div&gt;behalf of user&lt;/div&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#44546A;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D6D6D6;spacing=5;exitX=1.002;exitY=0.385;entryX=0;entryY=0.35;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="container-apps" target="copilot-studio" edge="1">
-                    <mxGeometry x="0.0121" y="39" relative="1" as="geometry">
-                        <mxPoint as="offset"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="e5" value="Analysis" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#8764B8;strokeWidth=2;dashed=1;dashPattern=8 5;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D7C8E8;spacing=5;exitX=0;exitY=0.72;entryX=1;entryY=0.72;" parent="1" source="copilot-studio" target="container-apps" edge="1">
-                    <mxGeometry x="0.065" y="21" relative="1" as="geometry">
-                        <mxPoint x="3" as="offset"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="e6" value="Final answer" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#6264A7;strokeWidth=3;dashed=1;dashPattern=8 5;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#C9C9E8;spacing=5;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" parent="1" source="agent" target="teams" edge="1">
-                    <mxGeometry x="0.0697" y="-30" relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="575" y="650"/>
-                            <mxPoint x="180" y="650"/>
-                        </Array>
-                        <mxPoint as="offset"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="note" value="Solid arrows: request and delegation   |   Dashed arrows: result flow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=13;fontFamily=Comic Sans MS;fontColor=#5E6C84;" parent="1" vertex="1">
-                    <mxGeometry x="450" y="710" width="600" height="35" as="geometry"/>
-                </mxCell>
-            </root>
-        </mxGraphModel>
-    </diagram>
+<mxfile host="app.diagrams.net">
+  <diagram id="high-level-sketch" name="High-Level Sketch">
+    <mxGraphModel dx="1649" dy="1278" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=28;fontStyle=1;fontFamily=Comic Sans MS;fontColor=#172B4D;" value="Stock Briefing Agents&amp;nbsp;" vertex="1">
+          <mxGeometry height="50" width="500" x="573" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;fontFamily=Comic Sans MS;fontColor=#5E6C84;" value="High-level request and delegation flow" vertex="1">
+          <mxGeometry height="35" width="500" x="573" y="132" as="geometry" />
+        </mxCell>
+        <mxCell id="teams" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#EDE7F6;strokeColor=#6264A7;strokeWidth=3;fontColor=#333333;fontSize=21;fontStyle=1;fontFamily=Comic Sans MS;shadow=0;" value="Teams /&amp;nbsp;&lt;div&gt;M365 Copilot&lt;br&gt;&lt;font style=&quot;font-size:14px&quot;&gt;User conversation&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="145" width="230" x="65" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="foundry" parent="1" style="swimlane;html=1;rounded=1;startSize=42;horizontal=1;sketch=1;comic=1;jiggle=2;fillColor=#EAF3FF;strokeColor=#0078D4;strokeWidth=3;fontColor=#004578;fontSize=20;fontStyle=1;fontFamily=Comic Sans MS;" value="Microsoft Foundry" vertex="1">
+          <mxGeometry height="355" width="380" x="385" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="agent" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#DAECFF;strokeColor=#0078D4;strokeWidth=2;fontColor=#004578;fontSize=19;fontStyle=1;fontFamily=Comic Sans MS;" value="Hosted Agent&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Understands the request&lt;br&gt;and creates the response&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="290" x="430" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="toolbox" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#FFFFFF;strokeColor=#0078D4;strokeWidth=2;fontColor=#004578;fontSize=19;fontStyle=1;fontFamily=Comic Sans MS;" value="Foundry Toolbox&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Web search plus MCP tool&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="187" x="533" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="container-apps" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#E8F5E9;strokeColor=#107C10;strokeWidth=3;fontColor=#0B5A0B;fontSize=20;fontStyle=1;fontFamily=Comic Sans MS;" value="Azure Container Apps&lt;br&gt;&lt;font style=&quot;font-size:18px&quot;&gt;CPS Bridge&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Authenticated MCP endpoint&lt;/font&gt;" vertex="1">
+          <mxGeometry height="175" width="260" x="855" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="copilot-studio" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#F5EEFB;strokeColor=#8764B8;strokeWidth=3;fontColor=#5C2D91;fontSize=21;fontStyle=1;fontFamily=Comic Sans MS;" value="Copilot Studio Agent&lt;br&gt;&lt;font style=&quot;font-size:14px&quot;&gt;Research and analysis&lt;/font&gt;" vertex="1">
+          <mxGeometry height="145" width="255" x="1210" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="teams" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#44546A;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D6D6D6;spacing=5;" target="agent" value="Ask for a stock briefing">
+          <mxGeometry relative="1" y="-34" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="agent" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#0078D4;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#B3D7F2;spacing=5;exitX=0.677;exitY=1.006;exitDx=0;exitDy=0;exitPerimeter=0;" target="toolbox" value="Use tools">
+          <mxGeometry relative="1" x="-0.0091" y="38" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="toolbox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#44546A;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D6D6D6;spacing=5;" target="container-apps" value="Delegate analysis">
+          <mxGeometry relative="1" x="-0.0286" y="6" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="container-apps" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#44546A;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D6D6D6;spacing=5;exitX=1.002;exitY=0.385;entryX=0;entryY=0.35;exitDx=0;exitDy=0;exitPerimeter=0;" target="copilot-studio" value="Call agent on&amp;nbsp;&lt;div&gt;behalf of user&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.0121" y="39" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="copilot-studio" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#8764B8;strokeWidth=2;dashed=1;dashPattern=8 5;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D7C8E8;spacing=5;exitX=0;exitY=0.72;entryX=1;entryY=0.72;" target="container-apps" value="Analysis">
+          <mxGeometry relative="1" x="0.065" y="21" as="geometry">
+            <mxPoint x="3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="agent" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#6264A7;strokeWidth=3;dashed=1;dashPattern=8 5;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#C9C9E8;spacing=5;exitX=0.25;exitY=1;entryX=0.5;entryY=1;exitDx=0;exitDy=0;" target="teams" value="Final answer">
+          <mxGeometry relative="1" x="0.0697" y="-30" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="502.5" y="650" />
+              <mxPoint x="180" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
 </mxfile>

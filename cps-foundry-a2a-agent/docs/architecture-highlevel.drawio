@@ -1,0 +1,92 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="delegated-a2a-architecture" name="High-Level Architecture">
+    <mxGraphModel dx="1512" dy="1172" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=28;fontStyle=1;fontFamily=Comic Sans MS;fontColor=#172B4D;" value="Delegated A2A Market Briefing" vertex="1">
+          <mxGeometry height="50" width="600" x="453" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;fontFamily=Comic Sans MS;fontColor=#5E6C84;" value="Copilot Studio orchestrates a user-authorized Foundry research agent" vertex="1">
+          <mxGeometry height="35" width="760" x="373" y="69" as="geometry" />
+        </mxCell>
+        <mxCell id="user" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#EDE7F6;strokeColor=#6264A7;strokeWidth=3;fontColor=#333333;fontSize=21;fontStyle=1;fontFamily=Comic Sans MS;shadow=0;" value="Teams / M365 Copilot&lt;br&gt;&lt;font style=&quot;font-size:14px&quot;&gt;Signed-in user asks for&lt;br&gt;a market briefing&lt;/font&gt;" vertex="1">
+          <mxGeometry height="155" width="235" x="85" y="235" as="geometry" />
+        </mxCell>
+        <mxCell id="cps" parent="1" style="swimlane;html=1;rounded=1;startSize=42;horizontal=1;sketch=1;comic=1;jiggle=2;fillColor=#F5EEFB;strokeColor=#8764B8;strokeWidth=3;fontColor=#5C2D91;fontSize=20;fontStyle=1;fontFamily=Comic Sans MS;" value="Copilot Studio" vertex="1">
+          <mxGeometry height="355" width="320" x="390" y="135" as="geometry" />
+        </mxCell>
+        <mxCell id="cps-agent" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#FFFFFF;strokeColor=#8764B8;strokeWidth=2;fontColor=#5C2D91;fontSize=19;fontStyle=1;fontFamily=Comic Sans MS;" value="Market Briefing Agent&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Resolves the symbol and&lt;br&gt;selects the remote A2A agent&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="240" x="430" y="205" as="geometry" />
+        </mxCell>
+        <mxCell id="oauth" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#FFF4CE;strokeColor=#C19C00;strokeWidth=2;fontColor=#6B4F00;fontSize=18;fontStyle=1;fontFamily=Comic Sans MS;" value="User-specific OAuth connection&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Authorization code flow&lt;br&gt;plus refresh token&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="240" x="430" y="345" as="geometry" />
+        </mxCell>
+        <mxCell id="foundry" parent="1" style="swimlane;html=1;rounded=1;startSize=42;horizontal=1;sketch=1;comic=1;jiggle=2;fillColor=#EAF3FF;strokeColor=#0078D4;strokeWidth=3;fontColor=#004578;fontSize=20;fontStyle=1;fontFamily=Comic Sans MS;" value="Microsoft Foundry" vertex="1">
+          <mxGeometry height="481" width="405" x="775" y="136" as="geometry" />
+        </mxCell>
+        <mxCell id="agent" parent="foundry" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#FFFFFF;strokeColor=#0078D4;strokeWidth=2;fontColor=#004578;fontSize=18;fontStyle=1;fontFamily=Comic Sans MS;" value="Market Research Agent&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Foundry Prompt Agent&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="218" x="36" y="228" as="geometry" />
+        </mxCell>
+        <mxCell id="toolbox" parent="foundry" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#FFFFFF;strokeColor=#0078D4;strokeWidth=2;fontColor=#004578;fontSize=18;fontStyle=1;fontFamily=Comic Sans MS;" value="Web Search Tool" vertex="1">
+          <mxGeometry height="75" width="195" x="47.5" y="373" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="foundry" source="agent" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#0078D4;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=13;labelBackgroundColor=#FFFFFF;labelBorderColor=#B3D7F2;spacing=5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="toolbox" value="Use managed tool">
+          <mxGeometry relative="1" x="0.0455" y="14" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="132" y="361" as="sourcePoint" />
+            <mxPoint x="131.99999999999955" y="394" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a2a-endpoint" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#DAECFF;strokeColor=#0078D4;strokeWidth=2;fontColor=#004578;fontSize=18;fontStyle=1;fontFamily=Comic Sans MS;" value="Authenticated A2A endpoint&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Validates token and enforces RBAC&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="318" x="815" y="206" as="geometry" />
+        </mxCell>
+        <mxCell id="identity-user" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#F5EEFB;strokeColor=#8764B8;strokeWidth=2;fontColor=#5C2D91;fontSize=15;fontStyle=1;fontFamily=Comic Sans MS;gradientColor=none;" value="1  User identity&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Channel and CPS authenticate&lt;br&gt;the signed-in user&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="235" x="435" y="522" as="geometry" />
+        </mxCell>
+        <mxCell id="identity-delegated" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#FFF4CE;strokeColor=#C19C00;strokeWidth=2;fontColor=#6B4F00;fontSize=15;fontStyle=1;fontFamily=Comic Sans MS;" value="2  Delegated access&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Token represents the same user&lt;br&gt;with user_impersonation scope&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="235" x="435" y="636" as="geometry" />
+        </mxCell>
+        <mxCell id="identity-rbac" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#DAECFF;strokeColor=#0078D4;strokeWidth=2;fontColor=#004578;fontSize=15;fontStyle=1;fontFamily=Comic Sans MS;" value="3  Foundry authorization&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Foundry Agent Consumer is required;&lt;br&gt;OAuth success alone is not access&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="263" x="804" y="636" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#44546A;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D6D6D6;spacing=5;" target="cps-agent" value="Ask for a&amp;nbsp;&lt;div&gt;market briefing&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.3337" y="44" as="geometry">
+            <mxPoint x="-16" y="3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="cps-agent" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#8764B8;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D7C8E8;spacing=5;" target="oauth" value="Get delegated access">
+          <mxGeometry relative="1" x="0.3306" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="oauth" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#44546A;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D6D6D6;spacing=5;" target="a2a-endpoint" value="A2A request plus &lt;br&gt;delegated token">
+          <mxGeometry relative="1" x="-0.0158" y="11" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="740.09" y="397.45" />
+              <mxPoint x="740.09" y="253.45" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="a2a-endpoint" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#0078D4;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#B3D7F2;spacing=5;exitX=0.33;exitY=1.019;exitDx=0;exitDy=0;exitPerimeter=0;" target="agent" value="Authorized invocation">
+          <mxGeometry relative="1" x="-0.15" y="12" as="geometry">
+            <mxPoint y="-1" as="offset" />
+            <mxPoint x="918.19" y="302.24" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="agent" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#6264A7;strokeWidth=3;dashed=1;dashPattern=8 5;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#C9C9E8;spacing=5;exitX=1;exitY=0.5;entryX=0.5;entryY=1;exitDx=0;exitDy=0;entryDx=0;entryDy=0;" target="user" value="Sourced market briefing">
+          <mxGeometry relative="1" x="0.8081" as="geometry">
+            <mxPoint y="-1" as="offset" />
+            <Array as="points">
+              <mxPoint x="1029" y="426" />
+              <mxPoint x="1108.54" y="426" />
+              <mxPoint x="1108.54" y="804.15" />
+              <mxPoint x="202.54" y="804.15" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

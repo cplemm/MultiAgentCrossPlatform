@@ -1,4 +1,4 @@
-# 📈 Foundry Hosted Stock Agent with delegated Copilot Studio analysis
+# 📈 Foundry Hosted stock agent with delegated Copilot Studio analysis
 
 ## End-to-end delegated multi-agent sample
 
