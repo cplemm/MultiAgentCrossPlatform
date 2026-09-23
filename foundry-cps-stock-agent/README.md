@@ -7,7 +7,7 @@ This sample implements an attended, delegated multi-agent flow across Teams, Mic
 💡 **Use case**
 
 A user asks the agent in Teams or Microsoft 365 Copilot for a current market
-briefing on Microsoft (`MSFT`). The Foundry Hosted Agent coordinates two
+briefing on a stock symbol (e.g. `MSFT`). The Foundry Hosted Agent coordinates two
 complementary capabilities: Foundry Web Search retrieves the latest available
 market price, while a Copilot Studio agent performs broader financial research.
 An authenticated MCP bridge connects the two agent platforms and preserves the
@@ -17,7 +17,7 @@ signed-in user's delegated identity through the Microsoft Entra on-behalf-of
 The end-to-end sequence is:
 
 1. **🔎 Find the current price:** Foundry Web Search finds the latest available
-   `MSFT` price together with its currency, market state, timestamp, and source.
+   price of a stock symbol together with its currency, market state, timestamp, and source.
 2. **🎫 Obtain delegated access:** Foundry obtains a delegated user token for
    the CPS Bridge through the Toolbox connection.
 3. **✅ Validate the caller:** The bridge validates the token's signature,
@@ -35,6 +35,8 @@ The bridge is required because Foundry does not expose the raw Teams/M365 bearer
 token to Hosted Agent container code. Foundry brokers a user-specific OAuth token
 for the bridge; the bridge validates that token and performs OBO for the Power
 Platform audience required by Copilot Studio.
+
+![Token Flow](./docs/token-flow.png)
 
 ## Repository contents
 
