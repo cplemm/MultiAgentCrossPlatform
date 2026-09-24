@@ -1,11 +1,22 @@
-# 🌐 Foundry Prompt Agent calling an external A2A agent with delegated OBO
-
-## End-to-end delegated cross-platform agent sample
+# 🌐 Foundry Prompt Agent Calling an External A2A Agent with Delegated OBO
 
 This sample implements an attended, delegated multi-agent flow across Teams/Microsoft 365 Copilot, Microsoft Foundry, an external Python A2A agent hosted on
 Azure Container Apps (ACA), Microsoft Entra ID, and Microsoft Graph.
 
-💡 **Use case**
+## 🧭 Navigation
+
+- [Use case](#-use-case)
+- [Repository contents](#-repository-contents)
+- [At a glance](#-at-a-glance)
+- [Architecture and delegated identity](#-architecture-and-delegated-identity)
+- [Protocols](#-protocols-used)
+- [Prerequisites and limitations](#-current-prerequisites-and-limitations)
+- [Deployment](#step-1-sign-in-and-select-deployment-values)
+- [Verification](#-verify-and-monitor-each-hop)
+- [Troubleshooting](#-troubleshooting)
+- [Production recommendations](#-production-recommendations)
+
+## 💡 Use case
 
 A signed-in user asks a Foundry Prompt Agent to identify them. The Foundry agent
 delegates that task to an external A2A 1.0 agent using a user-specific OAuth
@@ -37,9 +48,7 @@ client performs the downstream OBO exchange.
 
 ![Delegated external A2A token flow](./docs/token-flow.png)
 
-## Repository contents
-
-📦 **What is included**
+## 📦 Repository contents
 
 | Path | Purpose |
 | --- | --- |
@@ -57,9 +66,18 @@ client performs the downstream OBO exchange.
 | `scripts/invoke-caller.ps1` | Invokes the Foundry caller and surfaces OAuth consent links |
 | `scripts/grant-caller-access.ps1` | Grants **Foundry Agent Consumer** to a user or group |
 
-## Architecture and delegated identity
+## 🧩 At a glance
 
-🏗️ **Trust boundaries**
+| Component | Role | Primary contract |
+| --- | --- | --- |
+| Teams / Microsoft 365 Copilot | User-facing conversation channel | Activity protocol |
+| Foundry Prompt Agent | Selects and invokes the remote profile agent | Responses runtime and A2ATool |
+| External A2A Agent | Validates delegated access and obtains the user profile | A2A 1.0 and OAuth 2.0 OBO |
+| Azure Container Apps | Hosts the external Python agent | HTTPS |
+| Microsoft Entra ID | Exchanges the API token for Microsoft Graph access | OAuth 2.0 OBO |
+| Microsoft Graph | Returns the signed-in user's profile | REST `/v1.0/me` |
+
+## 🏗️ Architecture and delegated identity
 
 ![High-level architecture](./docs/architecture-highlevel.png)
 
@@ -88,9 +106,7 @@ The two Entra applications have separate responsibilities:
 | External A2A Graph Profile API | Resource API, `access_as_user` scope, confidential OBO client |
 | Foundry External A2A OAuth Client | Foundry's authorization-code client for the external API |
 
-## Protocols used
-
-🔌 **Each hop uses a different contract**
+## 🔌 Protocols used
 
 | Hop | Protocol |
 | --- | --- |
@@ -110,36 +126,55 @@ client and advertised by the agent card.
 Azure Container Apps only hosts the external process; it doesn't introduce a
 separate application protocol.
 
-## Current prerequisites and limitations
+## ⚠️ Current prerequisites and limitations
 
-⚠️ **Read this section before provisioning**
+### A2A compatibility
 
-- Foundry documentation describes **text-only input/output and no streaming**
-  for Foundry-hosted A2A targets. Use `streaming=False` for the safest external
-  demo. This repository advertises `AgentCapabilities(streaming=False)` and the
+> [!IMPORTANT]
+> Use A2A 1.0 with `streaming=False`. The current Foundry-hosted target path is
+> designed for text-only, nonstreaming exchanges.
+
+- This repository advertises `AgentCapabilities(streaming=False)`, and the
   smoke-test client also disables streaming.
 - A2A protocol **1.0 is generally available**. The earlier
   `a2a_preview`/A2A 0.3 surface remains preview. This sample uses
   `A2AProtocolVersion.V1_0` and `a2a-sdk==1.0.3`.
+- The Sweden Central resource provider currently returns HTTP 500 when custom
+  OAuth is created with connection category `RemoteA2A`. The sample uses an
+  OAuth `RemoteTool` connection as the credential store and supplies
+  `A2ATool.base_url` explicitly. The wire protocol remains A2A 1.0.
+
+### Identity, consent, and publication
+
 - OAuth-passthrough users need **Foundry Agent Consumer** or **Foundry User** on
   the calling Foundry agent or project. OAuth consent doesn't replace Foundry
   RBAC.
-- The first Foundry invocation produces a consent link for the external A2A
-  OAuth connection. Complete consent and invoke the request again.
+
+> [!NOTE]
+> The first Foundry invocation produces a consent link for the external A2A
+> OAuth connection. Complete consent and invoke the request again.
+
 - Teams/M365 uses the Foundry **Activity protocol**. The current Foundry portal
   publish flow enables Activity automatically and selects `BotServiceRbac` or
   `BotServiceTenant` based on the chosen publication scope.
 - All participating identities and both Entra applications are expected to use
   the same tenant. Cross-tenant OBO isn't implemented by this demo.
-- The external API is public on the internet and protects its JSON-RPC POST
-  endpoint with Microsoft Entra OAuth. The health endpoint and agent card remain
-  discoverable.
+- Teams/M365 publication and OAuth consent can take several minutes to
+  propagate. If a channel doesn't render the first consent link correctly,
+  establish consent in the Foundry Playground and retry in a new conversation.
+
+### External endpoint and runtime
+
+> [!WARNING]
+> The external API is public on the internet. Microsoft Entra OAuth protects its
+> JSON-RPC POST endpoint, but the health endpoint and agent card remain
+> discoverable.
+
 - The external agent uses an in-memory A2A task store and one ACA replica. Use a
   durable shared task store before enabling horizontal scale.
-- The Sweden Central resource provider currently returns HTTP 500 when custom
-  OAuth is created with connection category `RemoteA2A`. The sample uses an
-  OAuth `RemoteTool` connection as the credential store and supplies
-  `A2ATool.base_url` explicitly. The wire protocol remains A2A 1.0.
+
+### Deployment and production constraints
+
 - The automation creates one-year client secrets for demonstration purposes.
   Production deployments should use stronger credential and rotation patterns
   where supported.
@@ -147,13 +182,8 @@ separate application protocol.
 - The Foundry model deployment uses `gpt-5.4-mini` Global Standard capacity.
   Availability, quota, and permitted deployment types vary by subscription and
   region.
-- Teams/M365 publication and OAuth consent can take several minutes to
-  propagate. If a channel doesn't render the first consent link correctly,
-  establish consent in the Foundry Playground and retry in a new conversation.
 
-## Required tools and permissions
-
-🧰 **Developer tooling and administrative access**
+## 🧰 Required tools and permissions
 
 - Windows PowerShell 7.
 - Python 3.12 or newer.
@@ -161,7 +191,7 @@ separate application protocol.
 - Azure Developer CLI 1.27.1 or newer.
 - Microsoft Foundry azd extension:
 
- ```text
+  ```text
   azd ext install microsoft.foundry
   ```
 
@@ -176,9 +206,7 @@ separate application protocol.
 - Foundry Agent Consumer or Foundry User for every caller.
 - Permission to publish the Foundry caller to Teams/Microsoft 365 Copilot.
 
-## Environment templates
-
-⚙️ **Configuration checklist**
+## ⚙️ Environment templates
 
 The repository contains two safe templates:
 
@@ -435,9 +463,7 @@ The user then:
 To demonstrate denial, enable **Assignment required** on the external API
 enterprise application and assign only approved users/groups.
 
-## Verify and monitor each hop
-
-🔎 **Collect independent evidence**
+## 🔎 Verify and monitor each hop
 
 ### Foundry trace
 
@@ -475,9 +501,7 @@ The returned artifact contains:
 - Selected `/me` fields such as display name, UPN, mail, job title, and
   department
 
-## Local validation
-
-🧪 **Run before deployment or after code changes**
+## 🧪 Local validation
 
 ```text
 .\scripts\install-dev.ps1
@@ -506,9 +530,7 @@ A local process can validate startup and token handling, but a complete OAuth
 authorization-code and OBO flow requires correctly registered public redirect
 and resource URLs.
 
-## Troubleshooting
-
-🩺 **Fast symptom-to-cause guide**
+## 🩺 Troubleshooting
 
 | Symptom | Likely cause | Resolution |
 | --- | --- | --- |
@@ -525,9 +547,7 @@ and resource URLs.
 | `RemoteA2A` connection creation returns HTTP 500 | Regional resource-provider compatibility issue | Use the included `RemoteTool` OAuth credential fallback |
 | No Graph profile for another user | Consent or enterprise-app assignment is missing | Authorize and assign that user, then retry |
 
-## Secret rotation
-
-🔄 **Rotate both confidential applications carefully**
+## 🔄 Secret rotation
 
 The deployment uses:
 
@@ -548,9 +568,7 @@ When rotating:
 The automation's `create-entra-apps.ps1` rotates the demo credentials when
 rerun. Plan for that behavior before using it against a shared environment.
 
-## Production recommendations
-
-🛡️ **Move from demonstration to production readiness**
+## 🛡️ Production recommendations
 
 - Replace client secrets with certificates or federated credentials where the
   target platform supports them.
@@ -568,9 +586,7 @@ rerun. Plan for that behavior before using it against a shared environment.
 - Add prompt-injection defenses, content-safety evaluation, and protocol
   conformance testing.
 
-## References
-
-📚 **Primary product and protocol documentation**
+## 📚 References
 
 - [A2A protocol specification](https://a2a-protocol.org/latest/specification/)
 - [Connect Foundry to an A2A agent](https://learn.microsoft.com/azure/foundry/agents/how-to/tools/agent-to-agent)

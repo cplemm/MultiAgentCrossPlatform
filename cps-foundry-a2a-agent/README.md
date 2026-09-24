@@ -1,11 +1,22 @@
-# 🔗 Copilot Studio agent with a Foundry A2A market-research agent
-
-## End-to-end delegated multi-agent sample
+# 🔗 Copilot Studio Agent with a Foundry A2A Market-Research Agent
 
 This sample implements an attended, delegated multi-agent flow across Teams,
 Microsoft 365 Copilot, Copilot Studio (CPS), and Microsoft Foundry.
 
-💡 **Use case**
+## 🧭 Navigation
+
+- [Use case](#-use-case)
+- [Repository contents](#-repository-contents)
+- [At a glance](#-at-a-glance)
+- [Architecture and identity](#-architecture-and-identity)
+- [Protocols](#-protocols-used)
+- [Prerequisites and limitations](#-current-prerequisites-and-limitations)
+- [Deployment](#step-1-sign-in-and-create-an-azd-environment)
+- [Verification](#-verify-and-monitor-each-hop)
+- [Troubleshooting](#-troubleshooting)
+- [Production recommendations](#-production-recommendations)
+
+## 💡 Use case
 
 A user asks a Copilot Studio agent in Teams or Microsoft 365 Copilot for a
 current market briefing on a public company or stock symbol. The CPS agent acts
@@ -37,9 +48,7 @@ Teams, Microsoft 365, or OAuth bearer token.
 
 ![Delegated A2A token flow](./docs/token-flow.png)
 
-## Repository contents
-
-📦 **What is included**
+## 📦 Repository contents
 
 | Path | Purpose |
 | --- | --- |
@@ -53,9 +62,18 @@ Teams, Microsoft 365, or OAuth bearer token.
 | `scripts/register-cps-redirect.ps1` | Adds the CPS-generated OAuth redirect URI to the Entra app |
 | `scripts/create-prompt-agent.py` | Creates a Prompt Agent with managed Web Search |
 
-## Architecture and identity
+## 🧩 At a glance
 
-🏗️ **Flow, trust boundaries, and delegated authorization**
+| Component | Role | Primary contract |
+| --- | --- | --- |
+| Teams / Microsoft 365 Copilot | User-facing conversation channel | CPS channel activity |
+| Copilot Studio Agent | Resolves the company and delegates research | A2A connector with delegated OAuth |
+| Foundry Prompt Agent | Produces a current, sourced market briefing | Responses runtime |
+| Foundry Web Search | Retrieves public prices, news, catalysts, and risks | Managed tool call |
+| Microsoft Entra ID | Issues a user-delegated Foundry token | OAuth 2.0 |
+| Azure RBAC | Authorizes the caller on the Foundry agent | Foundry Agent Consumer |
+
+## 🏗️ Architecture and identity
 
 ![High-level architecture](./docs/architecture-highlevel.png)
 
@@ -85,9 +103,7 @@ This design uses delegated authorization, but it is **not an OBO exchange inside
 the Prompt Agent**. CPS obtains the delegated Foundry token directly through its
 OAuth connection, and Foundry performs authorization before invoking the agent.
 
-## Protocols used
-
-🔌 **Each hop uses a different contract**
+## 🔌 Protocols used
 
 | Hop | Protocol |
 | --- | --- |
@@ -115,9 +131,32 @@ open, cross-platform Agent2Agent protocol and its delegated authorization
 boundary. The native Foundry connection is an alternative when a
 Microsoft-specific Activity protocol integration is appropriate.
 
-## Current prerequisites and limitations
+## ⚠️ Current prerequisites and limitations
 
-⚠️ **Read this section before provisioning**
+### A2A and connector compatibility
+
+> [!IMPORTANT]
+> Incoming Foundry A2A endpoints currently support **Prompt Agents**. This demo
+> therefore creates that supported agent type. See [Enable incoming A2A on a
+> Foundry agent](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/enable-agent-to-agent-endpoint)
+> for current requirements.
+
+- Foundry exposes A2A 1.0 and A2A 0.3 behavior from the same endpoint. Enter the
+  unversioned A2A communication endpoint in CPS. CPS generates an A2A 1.0 custom
+  connector from the agent card; don't append an `a2a-version` query parameter
+  while creating the connection because the CPS connector wizard rejects it.
+- The current CPS-generated connector can omit the A2A version selector when it
+  calls Foundry. Foundry then defaults the unversioned request to A2A 0.3 and
+  rejects the connector's A2A 1.0 `SendMessage` method. After CPS creates the
+  connector, add an internal `A2A-Version: 1.0` request header to its
+  `InvokeA2A` operation as described in Step 5.
+- A2A endpoint configuration is attached to the stable agent resource separately
+  from immutable agent versions. Rerun `scripts/enable-a2a.ps1` after replacing
+  or redeploying an agent version.
+- Incoming A2A and CPS A2A integration are evolving capabilities. Portal
+  labels, API versions, and supported protocol behavior can change.
+
+### Identity, access, and consent
 
 - All participating users, the CPS environment, the OAuth application, and the
   Foundry project should be in the same Microsoft Entra tenant for this demo.
@@ -131,44 +170,31 @@ Microsoft-specific Activity protocol integration is appropriate.
 - Foundry protects both the A2A endpoint and agent card. CPS might not
   automatically populate the remote agent's name and description; enter the
   metadata manually when necessary.
-- Foundry exposes A2A 1.0 and A2A 0.3 behavior from the same endpoint. Enter the
-  unversioned A2A communication endpoint in CPS. CPS generates an A2A 1.0 custom
-  connector from the agent card; don't append an `a2a-version` query parameter
-  while creating the connection because the CPS connector wizard rejects it.
-- The current CPS-generated connector can omit the A2A version selector when it
-  calls Foundry. Foundry then defaults the unversioned request to A2A 0.3 and
-  rejects the connector's A2A 1.0 `SendMessage` method. After CPS creates the
-  connector, add an internal `A2A-Version: 1.0` request header to its
-  `InvokeA2A` operation as described in Step 5.
-- Do not enable **Search all websites** on the CPS orchestrator for this demo.
-  Otherwise CPS can silently answer with its own web search when the connected
-  A2A agent fails, making a failed delegation look successful.
-- Incoming Foundry A2A endpoints are currently supported only for **Prompt
-  Agents**. This demo therefore creates that supported agent type. See [Enable
-  incoming A2A on a Foundry
-  agent](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/enable-agent-to-agent-endpoint)
-  for the current supported agent types and setup requirements.
-- A2A endpoint configuration is attached to the stable agent resource separately
-  from immutable agent versions. Rerun `scripts/enable-a2a.ps1` after replacing
-  or redeploying an agent version.
+
+### Orchestration and data boundaries
+
+> [!WARNING]
+> Do not enable **Search all websites** on the CPS orchestrator for this demo.
+> CPS can otherwise answer with its own web search when A2A delegation fails,
+> making a failed integration look successful.
+
 - General Web Search is not a licensed market-data feed. Quotes can be delayed,
   unavailable, or inconsistent. Use a market-data API for deterministic
   production pricing.
 - Foundry Web Search can transfer search queries outside the Foundry compliance
   and geographic boundary. Review Grounding with Bing terms and organizational
   policy before enabling it.
+
+### Deployment and production constraints
+
 - The OAuth script creates a client secret valid for one year. This is convenient
   for a demo; production deployments should use stronger credential-management
   and rotation practices.
 - The sample provisions `gpt-5.4-mini` with Global Standard capacity. Model
   availability, quota, and permitted deployment types vary by subscription and
   region.
-- Incoming A2A and CPS A2A integration are evolving capabilities. Portal
-  labels, API versions, and supported protocol behavior can change.
 
-## Required tools and permissions
-
-🧰 **Developer tooling and administrative access**
+## 🧰 Required tools and permissions
 
 - PowerShell 7 or Windows PowerShell.
 - Azure CLI, signed in to the target tenant and subscription.
@@ -194,9 +220,7 @@ Microsoft-specific Activity protocol integration is appropriate.
 - A Microsoft Entra security group containing the intended demo users is
   recommended for RBAC and CPS sharing.
 
-## Configuration checklist
-
-⚙️ **Values to record**
+## ⚙️ Configuration checklist
 
 | Value | Where it is used |
 | --- | --- |
@@ -436,7 +460,8 @@ user-specific connection.
 
 ### Apply the A2A 1.0 connector workaround
 
-⚠️ **Required for the current CPS-generated connector**
+> [!IMPORTANT]
+> This workaround is required for the current CPS-generated connector.
 
 The generated connector declares `x-ms-agentic-protocol: a2a-1.0`, but it can
 forward requests to Foundry without an `A2A-Version` header or `a2a-version`
@@ -576,9 +601,7 @@ Both users can authenticate through the same CPS OAuth application. Their
 different results come from Foundry RBAC, demonstrating that the A2A request is
 authorized as the end user rather than as a shared application identity.
 
-## Verify and monitor each hop
-
-🔎 **Collect evidence independently**
+## 🔎 Verify and monitor each hop
 
 ### Copilot Studio
 
@@ -613,9 +636,7 @@ Invoke-RestMethod -Uri $cardUrl -Headers $headers
 
 The card should advertise a JSON-RPC interface with protocol version `1.0`.
 
-## Local validation
-
-🧪 **Validate source without attempting the complete delegated flow**
+## 🧪 Local validation
 
 ```powershell
 python -m compileall -q .\scripts\create-prompt-agent.py
@@ -625,9 +646,7 @@ This validates the Prompt Agent creation script. The complete CPS
 user-specific OAuth and Foundry A2A authorization boundary still requires the
 deployed end-to-end environment.
 
-## Troubleshooting
-
-🩺 **Fast symptom-to-cause guide**
+## 🩺 Troubleshooting
 
 | Symptom | Likely cause | Resolution |
 | --- | --- | --- |
@@ -647,9 +666,7 @@ deployed end-to-end environment.
 | Teams/M365 shows an old configuration | Channel publication or client cache has not propagated | Republish, wait, and start a new conversation |
 | Prompt Agent creation fails | Missing Python packages, project endpoint, model deployment, or CLI access | Activate the venv, set both environment variables, and verify Azure CLI sign-in |
 
-## OAuth secret rotation
-
-🔄 **Rotate the credential without breaking CPS**
+## 🔄 OAuth secret rotation
 
 The OAuth client secret is stored in the CPS connection. When rotating:
 
@@ -664,9 +681,7 @@ Because CPS connection properties can be difficult to edit reliably after
 creation, recreating the connection is often safer than partially changing its
 OAuth settings.
 
-## Production recommendations
-
-🛡️ **Move from demo convenience to production readiness**
+## 🛡️ Production recommendations
 
 - Use a licensed market-data API for deterministic pricing.
 - Store and rotate OAuth credentials through an approved secret-management
@@ -685,9 +700,7 @@ OAuth settings.
 - Define SLOs, retry behavior, timeouts, and fallback messaging for unavailable
   remote agents or search providers.
 
-## References
-
-📚 **Primary product documentation**
+## 📚 References
 
 - [Enable incoming A2A on a Foundry agent](https://learn.microsoft.com/azure/foundry/agents/how-to/enable-agent-to-agent-endpoint)
 - [Foundry A2A authentication](https://learn.microsoft.com/azure/foundry/agents/concepts/agent-to-agent-authentication)

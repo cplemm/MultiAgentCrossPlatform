@@ -10,6 +10,13 @@ how protocols such as **A2A**, **MCP**, **OAuth 2.0**, and the **Microsoft Entra
 on-behalf-of flow** (OBO) can be combined without passing raw user tokens into agent
 code.
 
+## 🧭 Navigation
+
+- [What these demos cover](#-what-these-demos-cover)
+- [Demo scenarios](#-demo-scenarios)
+- [Choosing a scenario](#-choosing-a-scenario)
+- [Before deploying](#-before-deploying)
+
 ## 🎯 What these demos cover
 
 - 🤝 Delegating work between agents hosted on different platforms
@@ -83,6 +90,7 @@ agent-to-agent authorization through Foundry.
 
 ## ⚠️ Before deploying
 
-The demos use capabilities whose availability, portal experience, and protocol
-support can evolve. Review the prerequisites and limitations in the selected
-scenario README before provisioning Azure or Microsoft 365 resources.
+> [!IMPORTANT]
+> The demos use capabilities whose availability, portal experience, and protocol
+> support can evolve. Review the prerequisites and limitations in the selected
+> scenario README before provisioning Azure or Microsoft 365 resources.

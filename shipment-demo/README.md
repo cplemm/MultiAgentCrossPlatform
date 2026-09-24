@@ -1,13 +1,23 @@
-# 🚚 Cross-platform delayed-shipment recovery
-
-## End-to-end multi-agent orchestration across Teams, Foundry, CPS, and A2A
+# 🚚 Cross-Platform Delayed-Shipment Recovery
 
 This sample implements an attended shipment-recovery workflow across Teams or
 Microsoft 365 Copilot, two Microsoft Foundry Hosted Agents, a Copilot Studio
 (CPS) policy specialist, and an external A2A supplier agent on Azure Container Apps
 (ACA).
 
-💡 **Use case**
+## 🧭 Navigation
+
+- [Use case](#-use-case)
+- [Agent roles at a glance](#-agent-roles-at-a-glance)
+- [Architecture and flow](#-architecture-and-flow)
+- [Protocols](#-protocols-used)
+- [Identity and authorization](#-identity-and-authorization)
+- [Prerequisites and limitations](#-current-prerequisites-and-limitations)
+- [Deployment](#step-1-create-and-publish-the-cps-policy-specialist)
+- [Verification](#-verify-and-troubleshoot-each-hop)
+- [Production recommendations](#-production-recommendations)
+
+## 💡 Use case
 
 A product launch depends on a component shipment that is late. The user asks the
 Launch Coordinator to determine whether the launch can proceed and to recommend
@@ -52,9 +62,7 @@ Policy compliant
 All shipment, inventory, supplier, and purchasing-policy data in this repository
 is synthetic.
 
-## Agent roles
-
-🤖 **Each agent owns a distinct responsibility**
+## 🤖 Agent roles at a glance
 
 | Agent or component | Implementation | Responsibility |
 | --- | --- | --- |
@@ -70,9 +78,7 @@ deployment, managed identity, Responses endpoint, logs, and lifecycle. The
 orchestrator identity receives least-privilege **Foundry Agent Consumer** access
 to that planner.
 
-## Architecture and flow
-
-🏗️ **Cross-platform orchestration**
+## 🏗️ Architecture and flow
 
 ![High-level architecture and end-to-end flow](./docs/architecture-highlevel.png)
 
@@ -91,9 +97,7 @@ ShipmentIntake
 `WorkflowBuilder(...).build().as_agent()` exposes the complete coordinator
 workflow through the Foundry Responses hosting adapter.
 
-## Repository contents
-
-📦 **What is included**
+## 📦 Repository contents
 
 | Path | Purpose |
 | --- | --- |
@@ -110,9 +114,7 @@ workflow through the Foundry Responses hosting adapter.
 | `.env.example` | Complete deployment-input, generated-output, and runtime checklist |
 | `src/*/.env.example` | Component-specific local runtime templates |
 
-## Protocols used
-
-🔌 **Each boundary uses its native contract**
+## 🔌 Protocols used
 
 | Hop | Protocol |
 | --- | --- |
@@ -135,9 +137,7 @@ publication layer creates the supported Activity-to-Responses bridge. Manually
 advertising Activity sends raw Bot Framework traffic to `/api/messages`, which
 `ResponsesHostServer` does not serve and results in HTTP 404.
 
-## Identity and authorization
-
-🔐 **Three authorization boundaries**
+## 🔐 Identity and authorization
 
 1. **Teams/M365 → Foundry coordinator**
    - Foundry publication authenticates the channel user.
@@ -162,25 +162,17 @@ The supplier endpoint is intentionally unauthenticated in this synthetic demo.
 Protect it with Entra workload identity, OAuth, or API Management before using
 real supplier data.
 
-## Current prerequisites and limitations
+## ⚠️ Current prerequisites and limitations
 
-⚠️ **Read this section before provisioning**
+### Copilot Studio and publication
 
-- The CPS Purchasing Policy Specialist must use the **Standard harness**. The
-  authenticated CPS execution API used here does not support GitHub Copilot
-  harness agents.
+> [!IMPORTANT]
+> The CPS Purchasing Policy Specialist must use the **Standard harness**. The
+> authenticated CPS execution API used here doesn't support GitHub Copilot
+> harness agents.
+
 - The CPS agent must be published and shared with intended users before the
   policy bridge invokes it.
-- All Microsoft identities, the CPS environment, the Entra application, and the
-  Foundry project are expected to be in one Entra tenant. Cross-tenant OBO is not
-  implemented.
-- The first policy-tool invocation can return a Foundry OAuth consent link.
-  Complete consent and submit the original request again.
-- OAuth-backed callers need **Foundry Agent Consumer** or higher on the
-  coordinator or its parent project. OAuth consent does not replace Foundry RBAC.
-- The Recovery Planner is a separate Hosted Agent. The coordinator cannot call it
-  until its managed identity receives **Foundry Agent Consumer** on the planner;
-  the deployment script applies this assignment.
 - The coordinator and planner use `ResponsesHostServer` and must remain
   Responses-only in `azure.yaml`. Teams/M365 Activity support is added by the
   Foundry publication flow, not by the source declaration.
@@ -189,12 +181,36 @@ real supplier data.
   produces a new package or version.
 - Teams/M365 publication, RBAC, OAuth consent, and app updates can take several
   minutes to propagate. Start a new Teams conversation after republishing.
-- The supplier A2A endpoint is public, unauthenticated, and contains synthetic
-  data only.
+
+### Identity, consent, and RBAC
+
+- All Microsoft identities, the CPS environment, the Entra application, and the
+  Foundry project are expected to be in one Entra tenant. Cross-tenant OBO is not
+  implemented.
+
+> [!NOTE]
+> The first policy-tool invocation can return a Foundry OAuth consent link.
+> Complete consent and submit the original request again.
+
+- OAuth-backed callers need **Foundry Agent Consumer** or higher on the
+  coordinator or its parent project. OAuth consent does not replace Foundry RBAC.
+- The Recovery Planner is a separate Hosted Agent. The coordinator cannot call it
+  until its managed identity receives **Foundry Agent Consumer** on the planner;
+  the deployment script applies this assignment.
+
+### External services and runtime constraints
+
+> [!WARNING]
+> The supplier A2A endpoint is public, unauthenticated, and contains synthetic
+> data only. Protect it before using real supplier information.
+
 - A2A 1.0 is used with `streaming=False`. The supplier uses an in-memory task
   store and one ACA replica.
 - The bridge and supplier are deployed from source with `az containerapp up`;
   Azure Container Registry and Container Apps build permissions are required.
+
+### Production boundaries
+
 - One Entra app acts as both bridge resource API and OBO client for demo
   convenience. Separate these responsibilities in production.
 - The automation creates a one-year client secret. Use certificates, workload
@@ -206,9 +222,7 @@ real supplier data.
 - The sample does not place orders, reserve stock, or commit spend. Those actions
   require an explicit human approval and transactional integration.
 
-## Required tools and permissions
-
-🧰 **Developer tooling and administrative access**
+## 🧰 Required tools and permissions
 
 - PowerShell 7 or Windows PowerShell.
 - Python 3.13 for parity with the Hosted Agent runtime.
@@ -232,9 +246,7 @@ real supplier data.
   specialist.
 - Permission to publish the coordinator to Teams and Microsoft 365 Copilot.
 
-## Environment templates
-
-⚙️ **Configuration checklist**
+## ⚙️ Environment templates
 
 | File | Used by |
 | --- | --- |
@@ -251,9 +263,7 @@ be copied to `.env` for local execution.
 
 Never commit populated `.env` files or `.azure/` state.
 
-## Local validation
-
-🧪 **Validate deterministic behavior before provisioning**
+## 🧪 Local validation
 
 From this directory:
 
@@ -396,9 +406,7 @@ Then republish `shipment-recovery-orchestrator` from Foundry to Teams/M365. If
 Foundry creates a new app package or version, refresh or reinstall it and start a
 new conversation.
 
-## Verify and troubleshoot each hop
-
-🔎 **Confirm the boundary that failed**
+## 🔎 Verify and troubleshoot each hop
 
 ### Foundry coordinator and planner
 
@@ -457,9 +465,7 @@ protobuf object's string representation.
 - Establish OAuth consent in the Foundry Playground if the channel does not render
   the first consent link reliably.
 
-## Production recommendations
-
-🛡️ **Harden before using real procurement data**
+## 🛡️ Production recommendations
 
 - Protect the supplier endpoint with Entra workload identity, OAuth, or API
   Management.
@@ -476,7 +482,7 @@ protobuf object's string representation.
 - Add evaluation datasets for policy compliance, option ranking, grounded final
   recommendations, and adversarial inputs.
 
-## References
+## 📚 References
 
 - [Agent Framework orchestrations](https://learn.microsoft.com/agent-framework/workflows/orchestrations/)
 - [Concurrent orchestration](https://learn.microsoft.com/agent-framework/workflows/orchestrations/concurrent)
