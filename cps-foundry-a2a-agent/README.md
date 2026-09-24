@@ -99,6 +99,22 @@ OAuth connection, and Foundry performs authorization before invoking the agent.
 Foundry publishes an authenticated A2A agent card and A2A endpoint. The setup
 script enables both Responses and A2A on the stable agent endpoint.
 
+### Alternative: native Foundry connected agent
+
+Copilot Studio's new experience also provides **Add Foundry agent**. This option
+uses the built-in **Azure AI Foundry Agent Service** connector and communicates
+with the Foundry agent through the **Activity protocol**, not A2A.
+
+The target Foundry agent must have its Activity endpoint enabled before it is
+connected from CPS. Creating the CPS connection doesn't enable Activity
+automatically, and the Foundry portal might continue to show only the Responses
+and A2A endpoints even after Activity is enabled.
+
+For this sample, the **A2A connection is preferred** because it demonstrates the
+open, cross-platform Agent2Agent protocol and its delegated authorization
+boundary. The native Foundry connection is an alternative when a
+Microsoft-specific Activity protocol integration is appropriate.
+
 ## Current prerequisites and limitations
 
 ⚠️ **Read this section before provisioning**
