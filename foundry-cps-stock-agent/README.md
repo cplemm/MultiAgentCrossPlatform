@@ -169,7 +169,7 @@ Review these before deploying:
 - Azure Developer CLI 1.27.1 or newer.
 - Microsoft Foundry azd extension:
 
-  ```powershell
+  ```text
   azd ext install microsoft.foundry
   ```
 
@@ -284,13 +284,13 @@ Power Platform API
 
 Grant tenant-wide admin consent:
 
-```powershell
+```text
 az ad app permission admin-consent --id <bridge-client-id>
 ```
 
 Verify the downstream grant:
 
-```powershell
+```text
 az ad app permission list-grants `
   --id <bridge-client-id> `
   --output table
@@ -333,7 +333,7 @@ assign every user/group that must authorize the Foundry connection.
 
 Sign in and choose values:
 
-```powershell
+```text
 az login
 az account set --subscription "<subscription-id>"
 
@@ -349,7 +349,7 @@ $cpsSchemaName = "<standard-cps-schema-name>"
 
 Create the resource group and deploy source:
 
-```powershell
+```text
 az group create `
   --name $resourceGroup `
   --location $location
@@ -367,7 +367,7 @@ The first revision can be unhealthy until required settings are added.
 
 Resolve the public MCP URL:
 
-```powershell
+```text
 $fqdn = az containerapp show `
   --name $bridgeName `
   --resource-group $resourceGroup `
@@ -379,7 +379,7 @@ $bridgeUrl = "https://$fqdn/mcp"
 
 Store the confidential credential:
 
-```powershell
+```text
 az containerapp secret set `
   --name $bridgeName `
   --resource-group $resourceGroup `
@@ -388,7 +388,7 @@ az containerapp secret set `
 
 Configure runtime values:
 
-```powershell
+```text
 az containerapp update `
   --name $bridgeName `
   --resource-group $resourceGroup `
@@ -409,7 +409,7 @@ az containerapp update `
 
 Verify the revision:
 
-```powershell
+```text
 az containerapp show `
   --resource-group $resourceGroup `
   --name $bridgeName `
@@ -418,7 +418,7 @@ az containerapp show `
 
 An unauthenticated MCP request should return `401`:
 
-```powershell
+```text
 (Invoke-WebRequest $bridgeUrl -SkipHttpErrorCheck).StatusCode
 ```
 
@@ -430,20 +430,20 @@ The project already contains `azure.yaml`; do not run `azd init`.
 
 Create/select an environment first:
 
-```powershell
+```text
 azd auth login
 azd env new stock-agent-demo
 ```
 
 If it already exists:
 
-```powershell
+```text
 azd env select stock-agent-demo
 ```
 
 Set all manifest inputs:
 
-```powershell
+```text
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 azd env set AZURE_LOCATION "swedencentral"
 azd env set AZURE_RESOURCE_GROUP "rg-stock-agent-demo"
@@ -456,7 +456,7 @@ azd env set CPS_BRIDGE_CLIENT_SECRET $bridgeClientSecret
 
 Deploy:
 
-```powershell
+```text
 azd up --no-prompt
 ```
 
@@ -475,7 +475,7 @@ flow.
 Custom OAuth generates a redirect URI only after the Foundry connection exists.
 Retrieve and register it:
 
-```powershell
+```text
 $projectId = azd env get-value AZURE_AI_PROJECT_ID
 
 $redirectUri = az rest `
@@ -504,7 +504,7 @@ az ad app update `
 
 Verify the complete connection without exposing its secret:
 
-```powershell
+```text
 az rest `
   --method get `
   --url "https://management.azure.com$projectId/connections/cps-bridge-connection?api-version=2025-06-01" `
@@ -540,7 +540,7 @@ the Playground first, then retry in M365.
 
 There are two grants to verify:
 
-```powershell
+```text
 # Downstream bridge → Power Platform
 az ad app permission list-grants `
   --id $bridgeClientId `
@@ -605,7 +605,7 @@ stock-price-web-search
 
 📋 **Bridge and OBO evidence**
 
-```powershell
+```text
 az containerapp logs show `
   --resource-group $resourceGroup `
   --name $bridgeName `
@@ -649,7 +649,7 @@ For near-real-time CPS telemetry:
 
 🧪 **Run before deployment or after code changes**
 
-```powershell
+```text
 python -m venv .venv
 & .\.venv\Scripts\python.exe -m pip install `
   -r .\cps-bridge\requirements-dev.txt
@@ -661,7 +661,7 @@ $env:PYTHONPATH = ".\cps-bridge"
 
 For local containers:
 
-```powershell
+```text
 Copy-Item .\cps-bridge\.env.example .\cps-bridge\.env
 Copy-Item .\hosted-agent\.env.example .\hosted-agent\.env
 docker compose up --build
