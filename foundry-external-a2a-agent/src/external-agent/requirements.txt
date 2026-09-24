@@ -1,0 +1,6 @@
+a2a-sdk[http-server]==1.0.3
+httpx>=0.28,<0.29
+msal>=1.31
+PyJWT[crypto]>=2.10
+uvicorn>=0.34
+

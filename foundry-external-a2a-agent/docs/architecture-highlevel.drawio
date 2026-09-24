@@ -1,0 +1,96 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="external-a2a-trust-boundaries" name="High-Level Architecture">
+    <mxGraphModel dx="1649" dy="1278" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=28;fontStyle=1;fontFamily=Comic Sans MS;fontColor=#172B4D;" value="Delegated External A2A Identity" vertex="1">
+          <mxGeometry height="50" width="600" x="500" y="12" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;fontFamily=Comic Sans MS;fontColor=#5E6C84;" value="Trust boundaries, OAuth delegation, and on-behalf-of flow" vertex="1">
+          <mxGeometry height="35" width="760" x="420" y="57" as="geometry" />
+        </mxCell>
+        <mxCell id="teams" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#EDE7F6;strokeColor=#6264A7;strokeWidth=3;fontColor=#333333;fontSize=21;fontStyle=1;fontFamily=Comic Sans MS;shadow=0;" value="Teams /&amp;nbsp;&lt;div&gt;M365 Copilot&lt;br&gt;&lt;font style=&quot;font-size:14px&quot;&gt;Signed-in user asks&lt;br&gt;for their profile&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="225" x="35" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="foundry" parent="1" style="swimlane;html=1;rounded=1;startSize=42;horizontal=1;sketch=1;comic=1;jiggle=2;fillColor=#EAF3FF;strokeColor=#0078D4;strokeWidth=3;fontColor=#004578;fontSize=20;fontStyle=1;fontFamily=Comic Sans MS;" value="Microsoft Foundry" vertex="1">
+          <mxGeometry height="340" width="365" x="335" y="215" as="geometry" />
+        </mxCell>
+        <mxCell id="prompt-agent" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#DAECFF;strokeColor=#0078D4;strokeWidth=2;fontColor=#004578;fontSize=19;fontStyle=1;fontFamily=Comic Sans MS;" value="External Profile Orchestrator&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Foundry Prompt Agent&lt;br&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="285" x="375" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="a2a-oauth" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#FFFFFF;strokeColor=#0078D4;strokeWidth=2;fontColor=#004578;fontSize=18;fontStyle=1;fontFamily=Comic Sans MS;" value="A2ATool + OAuth connection&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Brokers a user-specific token for&lt;br&gt;api://external-api/access_as_user&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="285" x="375" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="entra" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#FFF4CE;strokeColor=#C19C00;strokeWidth=3;fontColor=#6B4F00;fontSize=20;fontStyle=1;fontFamily=Comic Sans MS;" value="Microsoft Entra ID&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Issues the external API token&lt;br&gt;and Graph token for the same user&lt;/font&gt;" vertex="1">
+          <mxGeometry height="125" width="315" x="770" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="aca" parent="1" style="swimlane;html=1;rounded=1;startSize=42;horizontal=1;sketch=1;comic=1;jiggle=2;fillColor=#E8F5E9;strokeColor=#107C10;strokeWidth=3;fontColor=#0B5A0B;fontSize=20;fontStyle=1;fontFamily=Comic Sans MS;" value="Azure Container Apps" vertex="1">
+          <mxGeometry height="270" width="340" x="770" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="external-agent" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#FFFFFF;strokeColor=#107C10;strokeWidth=2;fontColor=#0B5A0B;fontSize=19;fontStyle=1;fontFamily=Comic Sans MS;" value="External A2A Agent&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Validates the delegated token&lt;br&gt;and performs confidential OBO&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="260" x="810" y="383" as="geometry" />
+        </mxCell>
+        <mxCell id="graph" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#F5EEFB;strokeColor=#8764B8;strokeWidth=3;fontColor=#5C2D91;fontSize=21;fontStyle=1;fontFamily=Comic Sans MS;" value="Microsoft Graph&lt;br&gt;&lt;font style=&quot;font-size:18px&quot;&gt;/v1.0/me&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Returns the signed-in&lt;br&gt;user profile&lt;/font&gt;" vertex="1">
+          <mxGeometry height="150" width="250" x="1250" y="338" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary-one" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#DAECFF;strokeColor=#0078D4;strokeWidth=2;fontColor=#6B4F00;fontSize=15;fontStyle=1;fontFamily=Comic Sans MS;" value="&lt;span style=&quot;color: rgb(0, 120, 212);&quot;&gt;1  Foundry to external API&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;access_as_user represents&lt;br&gt;the signed-in user&lt;/font&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="100" width="237" x="463" y="576" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary-two" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#E8F5E9;strokeColor=#107C10;strokeWidth=2;fontColor=#0B5A0B;fontSize=15;fontStyle=1;fontFamily=Comic Sans MS;" value="2  External API to Graph&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;OBO produces a Graph token&lt;br&gt;for the same user with User.Read&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="237" x="873" y="576" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="teams" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#44546A;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D6D6D6;spacing=5;" target="prompt-agent" value="Activity protocol">
+          <mxGeometry relative="1" x="0.2931" y="35" as="geometry">
+            <mxPoint x="23" y="-34" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="prompt-agent" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#0078D4;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=13;labelBackgroundColor=#FFFFFF;labelBorderColor=#B3D7F2;spacing=5;" target="a2a-oauth" value="Use A2A tool">
+          <mxGeometry relative="1" x="-0.1465" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="a2a-oauth" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#C19C00;strokeWidth=2;dashed=1;dashPattern=8 5;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=13;labelBackgroundColor=#FFFFFF;labelBorderColor=#E8D88A;spacing=5;exitX=1;exitY=0.25;entryX=0;entryY=0.7;" target="entra" value="Delegated API token">
+          <mxGeometry relative="1" x="-0.1" y="-20" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="a2a-oauth" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#44546A;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D6D6D6;spacing=5;exitX=1;exitY=0.7;entryX=0;entryY=0.55;" target="external-agent" value="A2A + delegated token">
+          <mxGeometry relative="1" x="-0.02" y="-24" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="external-agent" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#107C10;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=13;labelBackgroundColor=#FFFFFF;labelBorderColor=#B7DDB8;spacing=5;exitX=0.064;exitY=-0.01;entryX=0.181;entryY=1.011;exitDx=0;exitDy=0;exitPerimeter=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="entra" value="OBO exchange">
+          <mxGeometry relative="1" x="0.6502" y="15" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="entra" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#C19C00;strokeWidth=2;dashed=1;dashPattern=8 5;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=13;labelBackgroundColor=#FFFFFF;labelBorderColor=#E8D88A;spacing=5;exitX=0.717;exitY=1.015;entryX=0.715;entryY=-0.002;exitDx=0;exitDy=0;exitPerimeter=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="external-agent" value="Graph token">
+          <mxGeometry relative="1" x="-0.7021" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="external-agent" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#44546A;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D6D6D6;spacing=5;exitX=1;exitY=0.35;entryX=0;entryY=0.35;" target="graph" value="GET /me">
+          <mxGeometry relative="1" y="-24" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="graph" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#8764B8;strokeWidth=2;dashed=1;dashPattern=8 5;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D7C8E8;spacing=5;exitX=0;exitY=0.72;entryX=1;entryY=0.72;" target="external-agent" value="User profile">
+          <mxGeometry relative="1" y="22" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="external-agent" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#6264A7;strokeWidth=3;dashed=1;dashPattern=8 5;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#C9C9E8;spacing=5;exitX=0.13;exitY=1;entryX=0.5;entryY=1;exitDx=0;exitDy=0;exitPerimeter=0;" target="teams" value="Final response">
+          <mxGeometry relative="1" x="-0.0015" y="30" as="geometry">
+            <mxPoint x="-1" as="offset" />
+            <Array as="points">
+              <mxPoint x="843.73" y="728" />
+              <mxPoint x="150.09" y="728" />
+              <mxPoint x="150.09" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
