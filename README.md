@@ -29,7 +29,7 @@ architecture diagrams, prerequisites, and limitations.
 | 📈 [Foundry stock agent with Copilot Studio analysis](./foundry-cps-stock-agent/README.md) | Foundry → Copilot Studio | Authenticated MCP bridge | Foundry delegates to a bridge, which uses OBO to call Copilot Studio as the user |
 | 🔗 [Copilot Studio with a Foundry market-research agent](./cps-foundry-a2a-agent/README.md) | Copilot Studio → Foundry | A2A 1.0 | Copilot Studio obtains a delegated Foundry token and Foundry enforces user RBAC |
 | 🌐 [Foundry calling an external A2A agent](./foundry-external-a2a-agent/README.md) | Foundry → External agent → Microsoft Graph | A2A 1.0 | Foundry brokers a delegated API token and the external agent performs OBO for Graph |
-| 🚚 [Delayed-shipment recovery orchestration](./shipment-demo/README.md) | Foundry workflow → CPS + external A2A | Agent Framework concurrent workflow, MCP/OBO, and A2A 1.0 | Concurrent specialists preserve delegated policy access while deterministic planning stays in the Hosted Agent |
+| 🚚 [Delayed-shipment recovery orchestration](./shipment-demo/README.md) | Teams/M365 → Foundry → CPS + external A2A | Agent Framework workflow, MCP/OBO, A2A 1.0, and Responses | End-to-end orchestration combines delegated specialists with a separate recovery-planning agent |
 
 ### 📈 Scenario 1: Foundry to Copilot Studio
 
@@ -57,10 +57,16 @@ OBO exchange, and calls Microsoft Graph `/me` for the same user.
 
 ### 🚚 Scenario 4: Delayed-shipment recovery orchestration
 
-A Foundry Hosted Agent runs a Microsoft Agent Framework workflow. It queries a
-Copilot Studio purchasing-policy specialist and an external A2A supplier
-specialist concurrently, then uses deterministic Python planning and a Launch
-Coordinator agent to recommend the lowest-cost compliant recovery plan.
+A Foundry Hosted Agent runs a Microsoft Agent Framework workflow for a delayed
+component shipment. It calls a Copilot Studio purchasing-policy specialist and
+an external A2A supplier specialist concurrently, then sends both results to a
+separate Foundry Recovery Planner. The Launch Coordinator presents the
+lowest-cost compliant recovery plan to the user.
+
+This is the repository's end-to-end capstone demo. It ties together components
+and patterns from the other three scenarios: Foundry orchestration, MCP-based
+Copilot Studio integration, delegated OAuth and OBO, external A2A agents, and
+agent-to-agent authorization through Foundry.
 
 ➡️ [Open the shipment-recovery demo](./shipment-demo/README.md)
 
@@ -72,8 +78,8 @@ Coordinator agent to recommend the lowest-cost compliant recovery plan.
   to a Foundry Prompt Agent.
 - Use **Scenario 3** to learn how Foundry can securely delegate to an
   independently hosted A2A service and downstream API.
-- Use **Scenario 4** to combine all three integration patterns inside a
-  concurrent, code-first Agent Framework orchestration.
+- Use **Scenario 4** for an end-to-end business workflow that combines
+  components and integration patterns from the other three scenarios.
 
 ## ⚠️ Before deploying
 
