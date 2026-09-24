@@ -1,10 +1,22 @@
-# 📈 Foundry Hosted stock agent with delegated Copilot Studio analysis
-
-## End-to-end delegated multi-agent sample
+# 📈 Foundry Hosted Stock Agent with Delegated Copilot Studio Analysis
 
 This sample implements an attended, delegated multi-agent flow across Teams, Microsoft 365 Copilot, a Foundry Hosted Agent, and a Copilot Studio (CPS) Agent.
 
-💡 **Use case**
+## 🧭 Navigation
+
+- [Use case](#-use-case)
+- [Repository contents](#-repository-contents)
+- [At a glance](#-at-a-glance)
+- [Architecture and identity](#-architecture-and-identity)
+- [Protocols used](#-protocols-used)
+- [Prerequisites and limitations](#-current-prerequisites-and-limitations)
+- [Deployment steps](#step-1-create-the-standard-copilot-studio-analyst)
+- [Verification](#step-8-verify-each-hop)
+- [Local validation](#-local-validation)
+- [Troubleshooting](#-troubleshooting)
+- [Production recommendations](#-production-recommendations)
+
+## 💡 Use case
 
 A user asks the agent in Teams or Microsoft 365 Copilot for a current market
 briefing on a stock symbol (e.g. `MSFT`). The Foundry Hosted Agent coordinates two
@@ -38,9 +50,7 @@ Platform audience required by Copilot Studio.
 
 ![Token Flow](./docs/token-flow.png)
 
-## Repository contents
-
-📦 **What is included**
+## 📦 Repository contents
 
 | Path | Purpose |
 | --- | --- |
@@ -51,9 +61,18 @@ Platform audience required by Copilot Studio.
 | `docker-compose.yml` | Local startup for both containers |
 | `docs/` | Editable and rendered architecture diagrams |
 
-## Architecture and identity
+## 🧩 At a glance
 
-🏗️ **Flow, trust boundaries, and delegated identity**
+| Component | Role | Primary contract |
+| --- | --- | --- |
+| Teams / Microsoft 365 Copilot | User-facing conversation channel | Activity protocol |
+| Foundry Hosted Agent | Orchestrates price lookup and market analysis | Responses 2.0 |
+| Foundry Web Search | Retrieves current public price evidence | Managed tool invocation |
+| ACA CPS Bridge | Validates delegated access and connects to CPS | MCP over HTTPS and OAuth |
+| Copilot Studio Agent | Researches company context, catalysts, and risks | Activity messages and SSE |
+| Microsoft Entra ID | Exchanges the delegated assertion for CPS access | OAuth 2.0 OBO |
+
+## 🏗️ Architecture and identity
 
 ![High-level architecture](./docs/architecture-highlevel.png)
 
@@ -78,9 +97,7 @@ Identity crosses two separate authorization boundaries:
      CopilotStudio.Copilots.Invoke
      ```
 
-## Protocols used
-
-🔌 **Each hop uses a different contract**
+## 🔌 Protocols used
 
 | Hop | Protocol |
 | --- | --- |
@@ -111,19 +128,20 @@ the final answer to the user through the Activity channel. **A2A isn't used in
 this demo.** Azure Container Apps only hosts the bridge; it doesn't introduce a
 separate application protocol.
 
-## Current prerequisites and limitations
+## ⚠️ Current prerequisites and limitations
 
-⚠️ **Read this section before provisioning**
+### Copilot Studio compatibility
 
-Review these before deploying:
+> [!IMPORTANT]
+> The target CPS agent must use the **Standard harness**. `CopilotClient` and
+> the authenticated agent-execution API don't support agents powered by the
+> GitHub Copilot harness.
 
-- The target CPS agent **must use the Standard harness**. `CopilotClient` and the
-  authenticated agent-execution API do not support agents powered by the GitHub
-  Copilot harness. The returned error is:
+The unsupported harness returns:
 
-  ```text
-  This action doesn't support agents built with the GitHub Copilot harness.
-  ```
+```text
+This action doesn't support agents built with the GitHub Copilot harness.
+```
 
 - Create a Standard agent by turning off **New experience** on the Copilot Studio
   home page, or selecting **Other ways to build**.
@@ -138,32 +156,44 @@ Review these before deploying:
     → Search public websites
   ```
 
+- The bridge contains a compatibility shim for CPS citations carrying JSON-LD
+  `@id`, which Microsoft Agents Activity SDK 1.7.0 doesn't deserialize. The shim
+  removes only the unsupported identifier and preserves citation text and URLs.
+
+### Identity and consent
+
 - The demo uses one Entra app registration as both OAuth client and bridge API.
   This works for a demo but keeps inbound bridge consent and downstream CPS
   consent on one service principal. Use two app registrations in production.
-- Foundry custom OAuth is user-specific. The first invocation can return a
-  consent link; after authorization, retry the original request.
+
+> [!NOTE]
+> Foundry custom OAuth is user-specific. The first invocation can return a
+> consent link; after authorization, retry the original request.
+
 - Users invoking OAuth-backed tools need **Foundry Agent Consumer** or higher on
   the calling Foundry project/agent.
 - All participating identities must currently be in the same Entra tenant;
   cross-tenant token exchange isn't supported by this design.
-- General Web Search is not a market-data service. Quotes can be delayed,
-  unavailable, or inconsistent. Use a licensed quote API for deterministic
-  production pricing.
-- Grounding with Bing can transfer search queries outside Foundry/Power Platform
-  compliance or geographic boundaries. Review the applicable terms and policy.
-- The bridge contains a compatibility shim for CPS citations carrying JSON-LD
-  `@id`, which Microsoft Agents Activity SDK 1.7.0 doesn't deserialize. The shim
-  removes only the unsupported identifier and preserves citation text and URLs.
 - Custom OAuth connection settings are effectively immutable. Recreate the
   connection after changing its client, secret, endpoints, or scopes, and
   register the newly generated redirect URI.
+
+### Search and data boundaries
+
+> [!WARNING]
+> General Web Search isn't a market-data service. Quotes can be delayed,
+> unavailable, or inconsistent. Use a licensed quote API for deterministic
+> production pricing.
+
+- Grounding with Bing can transfer search queries outside Foundry/Power Platform
+  compliance or geographic boundaries. Review the applicable terms and policy.
+
+### Deployment and channel behavior
+
 - Teams/M365 publication and app-store changes can take several minutes to
   propagate. OAuth consent might render more reliably in the Foundry Playground.
 
-## Required tools and permissions
-
-🧰 **Developer tooling and administrative access**
+## 🧰 Required tools and permissions
 
 - Azure CLI, signed in to the target subscription.
 - Azure Developer CLI 1.27.1 or newer.
@@ -183,9 +213,7 @@ Review these before deploying:
 - An Entra administrator for tenant-wide delegated consent.
 - Copilot Studio maker permissions in the target environment.
 
-## Environment templates
-
-⚙️ **Configuration checklist**
+## ⚙️ Environment templates
 
 The repository contains three safe templates:
 
@@ -245,9 +273,7 @@ Record:
 - Directory/tenant ID
 - Application/client ID
 
-### Expose the bridge API
-
-🪪 **Inbound delegated access**
+### 🪪 Expose the bridge API
 
 Under **Expose an API**:
 
@@ -270,9 +296,7 @@ Under **Expose an API**:
    "requestedAccessTokenVersion": 2
    ```
 
-### Add downstream CPS permission
-
-🔐 **Power Platform delegated permission**
+### 🔐 Add downstream CPS permission
 
 Under **API permissions**, add:
 
@@ -298,9 +322,7 @@ az ad app permission list-grants `
 
 The output should contain `CopilotStudio.Copilots.Invoke`.
 
-### Create the demo credential
-
-🔑 **Secret handling**
+### 🔑 Create the demo credential
 
 Create a short-lived client secret and record its value. The same current
 secret is required by:
@@ -312,9 +334,7 @@ Store it only in Container Apps secret storage and the ignored azd environment.
 For production, use separate client/resource apps and certificate or federated
 credentials where supported.
 
-### Optional enterprise-app assignment
-
-👥 **Restrict who can authorize the bridge**
+### 👥 Optional enterprise-app assignment
 
 If **Assignment required** is enabled under the Enterprise Application:
 
@@ -589,9 +609,7 @@ Teams store.
 
 8️⃣ **Outcome:** independent evidence for Foundry, bridge/OBO, and CPS execution.
 
-### Foundry trace
-
-🔎 **Foundry evidence**
+### 🔎 Foundry trace
 
 The response trace should show:
 
@@ -601,9 +619,7 @@ stock-price-web-search
 → tool result
 ```
 
-### Bridge logs
-
-📋 **Bridge and OBO evidence**
+### 📋 Bridge logs and OBO evidence
 
 ```text
 az containerapp logs show `
@@ -624,9 +640,7 @@ Successful lifecycle entries are structured JSON and include:
 
 No tokens, client secrets, prompts, or full CPS responses are logged.
 
-### Copilot Studio Monitor
-
-📊 **CPS sessions, transcripts, and telemetry**
+### 📊 Copilot Studio Monitor
 
 Open the Standard CPS agent and select **Monitor**. API conversations can take
 up to an hour to appear and transcripts normally appear after the session ends.
@@ -645,9 +659,7 @@ For near-real-time CPS telemetry:
    it.
 6. Republish the CPS agent.
 
-## Local validation
-
-🧪 **Run before deployment or after code changes**
+## 🧪 Local validation
 
 ```text
 python -m venv .venv
@@ -671,9 +683,7 @@ A local `/responses` call has no M365 end-user identity. It can test startup and
 Web Search, but not the complete delegated OBO flow unless the caller supplies
 the required identity through Foundry.
 
-## Troubleshooting
-
-🩺 **Fast symptom-to-cause guide**
+## 🩺 Troubleshooting
 
 | Symptom | Likely cause | Resolution |
 | --- | --- | --- |
@@ -687,9 +697,7 @@ the required identity through Foundry.
 | CPS sessions unavailable | Missing Dataverse transcript role | Assign **Bot Transcript Viewer** through environment Security roles |
 | Custom OAuth fields look blank in portal | Portal doesn't hydrate immutable fields | Inspect the ARM connection with `az rest`; recreate to change OAuth settings |
 
-## Secret rotation
-
-🔄 **Rotate both consumers of the shared demo credential**
+## 🔄 Secret rotation
 
 The bridge client secret is used in two places:
 
@@ -706,9 +714,7 @@ When rotating:
 6. Reauthorize affected users if necessary.
 7. Delete the old Entra credential only after verification.
 
-## Production recommendations
-
-🛡️ **Move from demo convenience to production isolation**
+## 🛡️ Production recommendations
 
 - Use separate app registrations for the Foundry OAuth client and bridge API.
 - Replace shared secrets with certificates or federated credentials where the
@@ -719,9 +725,7 @@ When rotating:
 - Define explicit ownership, SLOs, retry behavior, and consent-revocation
   procedures across Foundry, Container Apps, Entra, and Copilot Studio.
 
-## References
-
-📚 **Primary product documentation and source samples**
+## 📚 References
 
 - [Foundry Hosted Agents](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agents)
 - [Foundry Web Search](https://learn.microsoft.com/azure/foundry/agents/how-to/tools/web-search)
