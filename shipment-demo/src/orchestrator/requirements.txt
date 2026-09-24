@@ -1,0 +1,8 @@
+agent-framework-foundry
+agent-framework-foundry-hosting>=1.0.0b260813
+agent-framework-orchestrations
+azure-ai-projects>=2.3.0
+azure-identity>=1.25.0
+httpx>=0.28,<0.29
+pydantic>=2.11
+python-dotenv>=1.0.1

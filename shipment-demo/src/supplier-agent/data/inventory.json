@@ -1,0 +1,31 @@
+{
+  "offers": [
+    {
+      "supplier_id": "Northwind Cells",
+      "part_number": "BAT-48V-750",
+      "available_units": 700,
+      "eta": "2026-10-04",
+      "unit_cost": 188.0,
+      "expedite_fee": 7500.0,
+      "quality_status": "Approved"
+    },
+    {
+      "supplier_id": "Alpine Energy",
+      "part_number": "BAT-48V-750",
+      "available_units": 600,
+      "eta": "2026-10-06",
+      "unit_cost": 181.0,
+      "expedite_fee": 4200.0,
+      "quality_status": "Approved"
+    },
+    {
+      "supplier_id": "Contoso Power",
+      "part_number": "BAT-48V-750",
+      "available_units": 900,
+      "eta": "2026-10-09",
+      "unit_cost": 179.0,
+      "expedite_fee": 2500.0,
+      "quality_status": "Conditional"
+    }
+  ]
+}

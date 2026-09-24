@@ -29,6 +29,7 @@ architecture diagrams, prerequisites, and limitations.
 | 📈 [Foundry stock agent with Copilot Studio analysis](./foundry-cps-stock-agent/README.md) | Foundry → Copilot Studio | Authenticated MCP bridge | Foundry delegates to a bridge, which uses OBO to call Copilot Studio as the user |
 | 🔗 [Copilot Studio with a Foundry market-research agent](./cps-foundry-a2a-agent/README.md) | Copilot Studio → Foundry | A2A 1.0 | Copilot Studio obtains a delegated Foundry token and Foundry enforces user RBAC |
 | 🌐 [Foundry calling an external A2A agent](./foundry-external-a2a-agent/README.md) | Foundry → External agent → Microsoft Graph | A2A 1.0 | Foundry brokers a delegated API token and the external agent performs OBO for Graph |
+| 🚚 [Delayed-shipment recovery orchestration](./shipment-demo/README.md) | Foundry workflow → CPS + external A2A | Agent Framework concurrent workflow, MCP/OBO, and A2A 1.0 | Concurrent specialists preserve delegated policy access while deterministic planning stays in the Hosted Agent |
 
 ### 📈 Scenario 1: Foundry to Copilot Studio
 
@@ -54,6 +55,15 @@ OBO exchange, and calls Microsoft Graph `/me` for the same user.
 
 ➡️ [Open the Foundry-to-external-A2A demo](./foundry-external-a2a-agent/README.md)
 
+### 🚚 Scenario 4: Delayed-shipment recovery orchestration
+
+A Foundry Hosted Agent runs a Microsoft Agent Framework workflow. It queries a
+Copilot Studio purchasing-policy specialist and an external A2A supplier
+specialist concurrently, then uses deterministic Python planning and a Launch
+Coordinator agent to recommend the lowest-cost compliant recovery plan.
+
+➡️ [Open the shipment-recovery demo](./shipment-demo/README.md)
+
 ## 🧭 Choosing a scenario
 
 - Use **Scenario 1** to understand MCP-based integration with Copilot Studio and
@@ -62,6 +72,8 @@ OBO exchange, and calls Microsoft Graph `/me` for the same user.
   to a Foundry Prompt Agent.
 - Use **Scenario 3** to learn how Foundry can securely delegate to an
   independently hosted A2A service and downstream API.
+- Use **Scenario 4** to combine all three integration patterns inside a
+  concurrent, code-first Agent Framework orchestration.
 
 ## ⚠️ Before deploying
 

@@ -1,0 +1,132 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="shipment-recovery-high-level" name="High-Level Architecture">
+    <mxGraphModel dx="1814" dy="1406" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=28;fontStyle=1;fontFamily=Comic Sans MS;fontColor=#172B4D;" value="Cross-Platform Shipment Recovery" vertex="1">
+          <mxGeometry height="50" width="660" x="570" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;fontFamily=Comic Sans MS;fontColor=#5E6C84;" value="Concurrent specialist delegation and deterministic recovery planning" vertex="1">
+          <mxGeometry height="35" width="740" x="530" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="teams" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#EDE7F6;strokeColor=#6264A7;strokeWidth=3;fontColor=#333333;fontSize=21;fontStyle=1;fontFamily=Comic Sans MS;shadow=0;" value="Teams /&amp;nbsp;&lt;div&gt;M365 Copilot&lt;br&gt;&lt;font style=&quot;font-size:14px&quot;&gt;Ask for a compliant&lt;br&gt;shipment recovery plan&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="225" x="35" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="foundry" parent="1" style="swimlane;html=1;rounded=1;startSize=42;horizontal=1;sketch=1;comic=1;jiggle=2;fillColor=#EAF3FF;strokeColor=#0078D4;strokeWidth=3;fontColor=#004578;fontSize=20;fontStyle=1;fontFamily=Comic Sans MS;" value="Microsoft Foundry" vertex="1">
+          <mxGeometry height="625" width="720" x="310" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="responses-note" parent="foundry" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=14;fontFamily=Comic Sans MS;fontColor=#5E6C84;" value="Fan-in through&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(94, 108, 132), rgb(134, 146, 166));&quot;&gt;authenticated&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(94, 108, 132), rgb(134, 146, 166));&quot;&gt;Responses API&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="219" x="351" y="415" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#DAECFF;strokeColor=#0078D4;strokeWidth=2;fontColor=#004578;fontSize=19;fontStyle=1;fontFamily=Comic Sans MS;" value="Launch Coordinator&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Hosted Agent MAF workflow&lt;br&gt;creates the decision brief&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="255" x="365" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="intake" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#FFFFFF;strokeColor=#0078D4;strokeWidth=2;fontColor=#004578;fontSize=18;fontStyle=1;fontFamily=Comic Sans MS;" value="Shipment Intake&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Normalizes the shipment,&lt;br&gt;quantity, and launch date&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="250" x="720" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="fanout" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#FFFFFF;strokeColor=#0078D4;strokeWidth=2;fontColor=#004578;fontSize=19;fontStyle=1;fontFamily=Comic Sans MS;" value="Concurrent Specialist Fan-Out&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:15px&quot;&gt;Policy Specialist Proxy&amp;nbsp;&amp;nbsp; | &amp;nbsp;&amp;nbsp;Supplier Specialist Executor&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;MCP + delegated OAuth&amp;nbsp;&amp;nbsp;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; A2A 1.0 JSON-RPC&lt;/font&gt;" vertex="1">
+          <mxGeometry height="120" width="500" x="405" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="planner" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#DAECFF;strokeColor=#0078D4;strokeWidth=2;fontColor=#004578;fontSize=19;fontStyle=1;fontFamily=Comic Sans MS;" value="Recovery Planner Hosted Agent&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Combines policy and supply results&lt;br&gt;and ranks feasible recovery options&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="330" x="490" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="aca" parent="1" style="swimlane;html=1;rounded=1;startSize=42;horizontal=1;sketch=1;comic=1;jiggle=2;fillColor=#E8F5E9;strokeColor=#107C10;strokeWidth=3;fontColor=#0B5A0B;fontSize=20;fontStyle=1;fontFamily=Comic Sans MS;" value="Azure Container Apps" vertex="1">
+          <mxGeometry height="480" width="280" x="1080" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="policy-bridge" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#FFFFFF;strokeColor=#107C10;strokeWidth=2;fontColor=#0B5A0B;fontSize=18;fontStyle=1;fontFamily=Comic Sans MS;" value="Purchasing Policy Bridge&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Validates the user token&lt;br&gt;and performs OBO&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="210" x="1115" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="supplier-agent" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#FFFFFF;strokeColor=#107C10;strokeWidth=2;fontColor=#0B5A0B;fontSize=18;fontStyle=1;fontFamily=Comic Sans MS;" value="Supplier A2A Agent&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Inventory, ETA, cost,&lt;br&gt;expedite, and quality&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="210" x="1115" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="power" parent="1" style="swimlane;html=1;rounded=1;startSize=42;horizontal=1;sketch=1;comic=1;jiggle=2;fillColor=#F5EEFB;strokeColor=#8764B8;strokeWidth=3;fontColor=#5C2D91;fontSize=20;fontStyle=1;fontFamily=Comic Sans MS;" value="Copilot Studio" vertex="1">
+          <mxGeometry height="230" width="330" x="1410" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="cps" parent="1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;comic=1;jiggle=2;fillColor=#FFFFFF;strokeColor=#8764B8;strokeWidth=2;fontColor=#5C2D91;fontSize=18;fontStyle=1;fontFamily=Comic Sans MS;" value="CPS Policy Specialist&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Returns policy thresholds,&lt;br&gt;approvals, and exclusions&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="250" x="1450" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="teams" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#44546A;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D6D6D6;spacing=5;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="coordinator" value="kick-off shipment-&lt;div&gt;recovery workflow&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.0635" y="20" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="280" y="435" />
+              <mxPoint x="280" y="292" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="coordinator" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#0078D4;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#B3D7F2;spacing=5;" target="intake" value="Normalize&amp;nbsp;&lt;div&gt;request&lt;/div&gt;">
+          <mxGeometry relative="1" x="-0.03" y="30" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="intake" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#0078D4;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#B3D7F2;spacing=5;" target="fanout" value="Run specialists concurrently">
+          <mxGeometry relative="1" x="-0.8385" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="fanout" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#44546A;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D6D6D6;spacing=5;exitX=1;exitY=0.3;entryX=0;entryY=0.5;" target="policy-bridge" value="MCP +&amp;nbsp;&lt;div&gt;delegated OAuth&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.0664" y="45" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="fanout" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#44546A;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D6D6D6;spacing=5;exitX=1;exitY=0.75;entryX=0;entryY=0.5;" target="supplier-agent" value="A2A 1.0">
+          <mxGeometry relative="1" x="-0.6846" y="-27" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="policy-bridge" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#44546A;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#D6D6D6;spacing=5;" target="cps" value="Activity + SSE">
+          <mxGeometry relative="1" y="-24" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="policy-bridge" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#107C10;strokeWidth=2;dashed=1;dashPattern=8 5;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=13;labelBackgroundColor=#FFFFFF;labelBorderColor=#D7C8E8;spacing=5;exitX=0;exitY=0.75;entryX=1;entryY=0.35;exitDx=0;exitDy=0;" target="planner" value="Policy result">
+          <mxGeometry relative="1" x="0.6832" y="-20" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1048.5" y="395" />
+              <mxPoint x="1048.5" y="685" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="supplier-agent" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#107C10;strokeWidth=2;dashed=1;dashPattern=8 5;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=13;labelBackgroundColor=#FFFFFF;labelBorderColor=#B3D7F2;spacing=5;exitX=0;exitY=0.8;entryX=1;entryY=0.75;" target="planner" value="Supply result">
+          <mxGeometry relative="1" x="0.5473" y="26" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1065" y="629" />
+              <mxPoint x="1065" y="725" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="planner" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#6264A7;strokeWidth=3;dashed=1;dashPattern=8 5;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#C9C9E8;spacing=5;exitX=0;exitY=0.5;entryX=0;entryY=0.7;" target="coordinator" value="Ranked recovery plan">
+          <mxGeometry relative="1" x="-0.16" y="24" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="330" y="700" />
+              <mxPoint x="330" y="312" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="coordinator" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#6264A7;strokeWidth=3;dashed=1;dashPattern=8 5;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#C9C9E8;spacing=5;exitX=0;exitY=0.3;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="teams" value="Final decision brief">
+          <mxGeometry relative="1" x="0.05" y="-28" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="147.49" y="273.51" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="note" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontFamily=Comic Sans MS;fontColor=#5E6C84;" value="The specialists run concurrently; the separate planner performs the deterministic fan-in" vertex="1">
+          <mxGeometry height="30" width="700" x="345" y="806" as="geometry" />
+        </mxCell>
+        <mxCell id="rj22cbgQCcgtFKmRDduF-1" edge="1" parent="1" source="fanout" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;comic=1;jiggle=2;strokeColor=#0078D4;strokeWidth=3;endArrow=classic;endFill=1;fontFamily=Comic Sans MS;fontSize=14;labelBackgroundColor=#FFFFFF;labelBorderColor=#B3D7F2;spacing=5;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;dashed=1;dashPattern=1 4;" target="planner" value="">
+          <mxGeometry relative="1" x="-0.8385" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points" />
+            <mxPoint x="905" y="369" as="sourcePoint" />
+            <mxPoint x="715" y="439" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

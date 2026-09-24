@@ -1,0 +1,54 @@
+{
+  "default_shipment_id": "SHP-10042",
+  "shipments": {
+    "SHP-10042": {
+      "part_number": "BAT-48V-750",
+      "description": "48V 750Wh battery pack for the UrbanGlide launch",
+      "required_units": 1200,
+      "launch_date": "2026-10-07",
+      "original_eta": "2026-10-02",
+      "delayed_eta": "2026-10-16",
+      "incumbent_unit_cost": 175.0,
+      "incumbent_partial_units": 400,
+      "incumbent_partial_eta": "2026-10-05"
+    }
+  },
+  "mock_policy": {
+    "alternate_supplier_allowed": true,
+    "split_shipment_allowed": true,
+    "max_incremental_cost": 30000,
+    "max_expedite_fee": 12000,
+    "minimum_units_by_launch": 900,
+    "requires_director_approval": false,
+    "rationale": "Emergency sourcing is permitted for approved suppliers when launch coverage is at least 900 units and incremental cost stays within delegated limits."
+  },
+  "mock_supplier_offers": [
+    {
+      "supplier_id": "Northwind Cells",
+      "part_number": "BAT-48V-750",
+      "available_units": 700,
+      "eta": "2026-10-04",
+      "unit_cost": 188.0,
+      "expedite_fee": 7500.0,
+      "quality_status": "Approved"
+    },
+    {
+      "supplier_id": "Alpine Energy",
+      "part_number": "BAT-48V-750",
+      "available_units": 600,
+      "eta": "2026-10-06",
+      "unit_cost": 181.0,
+      "expedite_fee": 4200.0,
+      "quality_status": "Approved"
+    },
+    {
+      "supplier_id": "Contoso Power",
+      "part_number": "BAT-48V-750",
+      "available_units": 900,
+      "eta": "2026-10-09",
+      "unit_cost": 179.0,
+      "expedite_fee": 2500.0,
+      "quality_status": "Conditional"
+    }
+  ]
+}

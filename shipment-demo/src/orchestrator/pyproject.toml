@@ -1,0 +1,26 @@
+[project]
+name = "shipment-recovery-orchestrator"
+version = "0.1.0"
+description = "A Microsoft Agent Framework shipment-recovery workflow hosted in Foundry."
+requires-python = ">=3.13"
+dependencies = [
+    "agent-framework-foundry",
+    "agent-framework-foundry-hosting>=1.0.0b260813",
+    "agent-framework-orchestrations",
+    "azure-ai-projects>=2.3.0",
+    "azure-identity>=1.25.0",
+    "httpx>=0.28,<0.29",
+    "pydantic>=2.11",
+    "python-dotenv>=1.0.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.24",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+asyncio_mode = "auto"

@@ -1,0 +1,7 @@
+mcp==1.26.0
+aiohttp>=3.11
+msal>=1.31.0
+PyJWT[crypto]>=2.10.0
+python-dotenv>=1.0.1
+microsoft-agents-activity>=1.7.0
+microsoft-agents-copilotstudio-client>=1.7.0

@@ -1,0 +1,43 @@
+# Azure Developer CLI state and secrets
+.azure/
+
+# Environment and secret files
+.env
+.env.*
+!.env.example
+!**/.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+secrets*.json
+credentials*.json
+
+# Python
+.venv/
+.venv*/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# IDE and OS state
+.vscode/
+.idea/
+.vs/
+*.user
+.DS_Store
+Thumbs.db
+
+# Logs and generated packages
+*.log
+*.trace
+artifacts/
+out/

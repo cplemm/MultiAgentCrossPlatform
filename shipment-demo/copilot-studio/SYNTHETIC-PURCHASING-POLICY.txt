@@ -1,0 +1,12 @@
+SYNTHETIC PURCHASING POLICY — DEMONSTRATION ONLY
+
+Emergency launch-recovery sourcing
+
+1. Alternate suppliers may be used only when their quality status is Approved.
+2. Split shipments are permitted for launch recovery.
+3. The launch must have at least 900 units available by the committed launch date.
+4. Incremental cost up to USD 30,000 is within delegated purchasing authority.
+5. Any individual expedite fee must not exceed USD 12,000.
+6. Options above the incremental-cost threshold require director approval.
+7. Conditional or unapproved suppliers require a separate quality exception and
+   must not be treated as policy-compliant without that approval.

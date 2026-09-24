@@ -1,0 +1,1 @@
+Evaluate a shipment-recovery orchestrator that must query purchasing-policy and supplier specialists, calculate policy-compliant recovery options, select the lowest-cost option meeting launch coverage, preserve factual shipment values, identify approvals, and present a grounded decision brief without inventing costs, dates, suppliers, or policy.
