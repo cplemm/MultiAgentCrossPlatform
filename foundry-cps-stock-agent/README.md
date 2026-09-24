@@ -78,10 +78,6 @@ Identity crosses two separate authorization boundaries:
      CopilotStudio.Copilots.Invoke
      ```
 
-End-to-end components & flow:
-
-![Detailed architecture](./docs/architecture-detailed.png)
-
 ## Protocols used
 
 🔌 **Each hop uses a different contract**
@@ -288,13 +284,13 @@ Power Platform API
 
 Grant tenant-wide admin consent:
 
-```console
+```powershell
 az ad app permission admin-consent --id <bridge-client-id>
 ```
 
 Verify the downstream grant:
 
-```console
+```powershell
 az ad app permission list-grants `
   --id <bridge-client-id> `
   --output table
@@ -337,7 +333,7 @@ assign every user/group that must authorize the Foundry connection.
 
 Sign in and choose values:
 
-```console
+```powershell
 az login
 az account set --subscription "<subscription-id>"
 
@@ -353,7 +349,7 @@ $cpsSchemaName = "<standard-cps-schema-name>"
 
 Create the resource group and deploy source:
 
-```console
+```powershell
 az group create `
   --name $resourceGroup `
   --location $location
@@ -371,7 +367,7 @@ The first revision can be unhealthy until required settings are added.
 
 Resolve the public MCP URL:
 
-```console
+```powershell
 $fqdn = az containerapp show `
   --name $bridgeName `
   --resource-group $resourceGroup `
@@ -383,7 +379,7 @@ $bridgeUrl = "https://$fqdn/mcp"
 
 Store the confidential credential:
 
-```console
+```powershell
 az containerapp secret set `
   --name $bridgeName `
   --resource-group $resourceGroup `
@@ -392,7 +388,7 @@ az containerapp secret set `
 
 Configure runtime values:
 
-```console
+```powershell
 az containerapp update `
   --name $bridgeName `
   --resource-group $resourceGroup `
@@ -413,7 +409,7 @@ az containerapp update `
 
 Verify the revision:
 
-```console
+```powershell
 az containerapp show `
   --resource-group $resourceGroup `
   --name $bridgeName `
@@ -434,14 +430,14 @@ The project already contains `azure.yaml`; do not run `azd init`.
 
 Create/select an environment first:
 
-```console
+```powershell
 azd auth login
 azd env new stock-agent-demo
 ```
 
 If it already exists:
 
-```console
+```powershell
 azd env select stock-agent-demo
 ```
 
@@ -460,7 +456,7 @@ azd env set CPS_BRIDGE_CLIENT_SECRET $bridgeClientSecret
 
 Deploy:
 
-```console
+```powershell
 azd up --no-prompt
 ```
 
