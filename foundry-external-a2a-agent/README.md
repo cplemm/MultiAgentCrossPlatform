@@ -139,10 +139,6 @@ separate application protocol.
 - A2A protocol **1.0 is generally available**. The earlier
   `a2a_preview`/A2A 0.3 surface remains preview. This sample uses
   `A2AProtocolVersion.V1_0` and `a2a-sdk==1.0.3`.
-- The Sweden Central resource provider currently returns HTTP 500 when custom
-  OAuth is created with connection category `RemoteA2A`. The sample uses an
-  OAuth `RemoteTool` connection as the credential store and supplies
-  `A2ATool.base_url` explicitly. The wire protocol remains A2A 1.0.
 
 ### Identity, consent, and publication
 
