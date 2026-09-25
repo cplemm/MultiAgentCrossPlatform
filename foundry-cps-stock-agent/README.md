@@ -107,21 +107,9 @@ Identity crosses two separate authorization boundaries:
 | Hosted Agent → ACA bridge | **MCP Streamable HTTP** over HTTPS |
 | Foundry OAuth connection → bridge | OAuth 2.0 delegated access token for `access_as_user` |
 | ACA bridge → Microsoft Entra | OAuth 2.0 **On-Behalf-Of (OBO)** token exchange |
-| ACA bridge → CPS agent | CPS authenticated conversation API using Microsoft Agents Activity messages |
+| ACA bridge → CPS agent | CPS authenticated conversation API using Activity messages |
 | CPS agent → ACA bridge | **Server-Sent Events (SSE)** carrying Activity JSON |
 | Foundry → Teams/M365 | Activity protocol response |
-
-The condensed protocol chain is:
-
-```text
-Teams/M365
-  → Activity protocol
-  → Foundry Hosted Agent / Responses 2.0
-  → MCP Streamable HTTP + OAuth
-  → ACA bridge
-  → Entra OBO
-  → CPS conversation API / Activity + SSE
-```
 
 The bridge returns the CPS result as an MCP tool response, and Foundry returns
 the final answer to the user through the Activity channel. **A2A isn't used in
